@@ -1,5 +1,5 @@
-import { SignUp } from "../views/Signup";
+import { Login } from "../views/Login";
 
 export function Root() {
-  return <SignUp />;
+  return <Login />;
 }
