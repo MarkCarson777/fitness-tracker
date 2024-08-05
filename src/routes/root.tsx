@@ -14,10 +14,20 @@ export function Root() {
 
   return (
     <>
-      <h1 className="border-2">Fitness Tracker</h1>
+      <h1>Fitness Tracker</h1>
       <form className="flex flex-col">
-        <input type="email" value={email} onChange={(v) => onChange(v)} />
-        <input type="password" value={password} onChange={(v) => onChange(v)} />
+        <input
+          type="email"
+          placeholder="Email..."
+          value={email}
+          onChange={(v) => onChange(v)}
+        />
+        <input
+          type="password"
+          placeholder="Password..."
+          value={password}
+          onChange={(v) => onChange(v)}
+        />
         <button
           type="submit"
           className="w-fit"
