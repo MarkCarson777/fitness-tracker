@@ -1,6 +1,12 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
 import { firebaseSignUp } from "../firebase/AuthService";
+
+const SignupSchema = Yup.object().shape({
+  email: Yup.string().email("Invalid email").required("Required"),
+  password: Yup.string().required("Required"),
+});
 
 export function Root() {
   return (
@@ -8,19 +14,9 @@ export function Root() {
       <h1>Fitness Tracker</h1>
       <Formik
         initialValues={{ email: "", password: "" }}
-        validate={(values) => {
-          const errors = {};
-          if (!values.email) {
-            errors.email = "Required";
-          } else if (
-            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-          ) {
-            errors.email = "Invalid email address";
-          }
-          return errors;
-        }}
-        onSubmit={() => {
-          firebaseSignUp({ email, password });
+        validationSchema={SignupSchema}
+        onSubmit={(values) => {
+          firebaseSignUp({ email: values.email, password: values.password });
         }}
       >
         {({ isSubmitting }) => (
@@ -30,7 +26,7 @@ export function Root() {
             <Field type="password" name="password" />
             <ErrorMessage name="password" component="div" />
             <button className="w-fit" type="submit" disabled={isSubmitting}>
-              Submit
+              Sign Up
             </button>
           </Form>
         )}
