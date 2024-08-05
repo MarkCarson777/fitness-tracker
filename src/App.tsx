@@ -9,8 +9,6 @@ export function App() {
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  console.log("currentUser", currentUser);
-
   useEffect(() => {
     if (!currentUser) {
       navigate("/");
