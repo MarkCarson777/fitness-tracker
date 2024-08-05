@@ -14,8 +14,6 @@ export function App() {
   useEffect(() => {
     if (!currentUser) {
       navigate("/");
-    } else {
-      navigate("/workout");
     }
   }, [currentUser]);
 

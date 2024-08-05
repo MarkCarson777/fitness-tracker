@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
@@ -9,12 +10,16 @@ const SignupSchema = Yup.object().shape({
 });
 
 export function Login() {
+  const navigate = useNavigate();
+
   return (
     <Formik
       initialValues={{ email: "", password: "" }}
       validationSchema={SignupSchema}
       onSubmit={(values) => {
-        signInUser(values.email, values.password);
+        signInUser(values.email, values.password).then(() =>
+          navigate("/workout")
+        );
       }}
     >
       {({ isSubmitting }) => (
