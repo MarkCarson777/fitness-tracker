@@ -15,13 +15,16 @@ export const AuthContext = createContext({
 });
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [currentUser, setCurrentUser] = useState<User | null>(() => {
-    const storedUser = localStorage.getItem("currentUser");
-    return storedUser ? JSON.parse(storedUser) : null;
-  });
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
+    const storedUser = localStorage.getItem("currentUser");
+
+    if (storedUser) {
+      setCurrentUser(JSON.parse(storedUser));
+    }
+
     const unsubscribe = userStateListener((user) => {
       if (user) {
         setCurrentUser(user);
