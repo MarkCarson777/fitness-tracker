@@ -16,7 +16,12 @@ export const signUpUser = async (email: string, password: string) => {
 };
 
 export const signOutUser = async () => {
-  await signOut(auth);
+  try {
+    await signOut(auth);
+    console.log("Successfully signed out");
+  } catch (error) {
+    console.error("Error signing out:", error);
+  }
 };
 
 export const userStateListener = (callback: (user: User | null) => void) => {

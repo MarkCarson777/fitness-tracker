@@ -19,9 +19,13 @@ export function Login() {
     >
       {({ isSubmitting }) => (
         <Form className="flex flex-col border-2 w-fit">
-          <Field type="email" name="email" />
+          <Field type="email" name="email" autoComplete="email" />
           <ErrorMessage name="email" component="div" />
-          <Field type="password" name="password" />
+          <Field
+            type="password"
+            name="password"
+            autoComplete="current-password"
+          />
           <ErrorMessage name="password" component="div" />
           <button className="w-fit" type="submit" disabled={isSubmitting}>
             Log In
