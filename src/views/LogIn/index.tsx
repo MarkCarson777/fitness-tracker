@@ -1,8 +1,7 @@
-import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../context/auth-context";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-
-import { signInUser } from "../../firebase/auth";
 
 const SignupSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -10,16 +9,14 @@ const SignupSchema = Yup.object().shape({
 });
 
 export function Login() {
-  const navigate = useNavigate();
+  const { signIn } = useContext(AuthContext);
 
   return (
     <Formik
       initialValues={{ email: "", password: "" }}
       validationSchema={SignupSchema}
       onSubmit={(values) => {
-        signInUser(values.email, values.password).then(() =>
-          navigate("/workout")
-        );
+        signIn(values.email, values.password);
       }}
     >
       {({ isSubmitting }) => (

@@ -8,11 +8,21 @@ import {
 import { auth } from "./config";
 
 export const signInUser = async (email: string, password: string) => {
-  return await signInWithEmailAndPassword(auth, email, password);
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    console.log("Successfully signed in");
+  } catch (error) {
+    console.error("Error signing in:", error);
+  }
 };
 
 export const signUpUser = async (email: string, password: string) => {
-  return await createUserWithEmailAndPassword(auth, email, password);
+  try {
+    await createUserWithEmailAndPassword(auth, email, password);
+    console.log("Successfully signed up");
+  } catch (error) {
+    console.error("Error signing up:", error);
+  }
 };
 
 export const signOutUser = async () => {

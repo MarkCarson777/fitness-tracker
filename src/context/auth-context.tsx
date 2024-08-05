@@ -1,6 +1,6 @@
 import { User } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { signOutUser, userStateListener } from "../firebase/auth";
+import { signInUser, signOutUser, userStateListener } from "../firebase/auth";
 import { createContext, useState, useEffect, ReactNode } from "react";
 
 type AuthProviderProps = {
@@ -10,22 +10,35 @@ type AuthProviderProps = {
 export const AuthContext = createContext({
   currentUser: {} as User | null,
   setCurrentUser: (_user: User) => {},
+  signIn: (_email: string, _password: string) => {},
   signOut: () => {},
 });
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [currentUser, setCurrentUser] = useState<User | null>(() => {
+    const storedUser = localStorage.getItem("currentUser");
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
   const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = userStateListener((user) => {
       if (user) {
         setCurrentUser(user);
+        localStorage.setItem("currentUser", JSON.stringify(user));
+      } else {
+        setCurrentUser(null);
+        localStorage.removeItem("currentUser");
       }
     });
 
     return unsubscribe;
   }, [setCurrentUser]);
+
+  const signIn = (email: string, password: string) => {
+    signInUser(email, password);
+    navigate("/workout");
+  };
 
   const signOut = () => {
     signOutUser();
@@ -38,6 +51,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       value={{
         currentUser,
         setCurrentUser,
+        signIn,
         signOut,
       }}
     >
