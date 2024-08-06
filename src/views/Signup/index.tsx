@@ -3,7 +3,7 @@ import * as Yup from "yup";
 
 import { signUpUser } from "../../firebase/auth";
 
-const SignupSchema = Yup.object().shape({
+const SignUpSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
   password: Yup.string().required("Required"),
 });
@@ -12,7 +12,7 @@ export function SignUp() {
   return (
     <Formik
       initialValues={{ email: "", password: "" }}
-      validationSchema={SignupSchema}
+      validationSchema={SignUpSchema}
       onSubmit={(values) => {
         signUpUser(values.email, values.password);
       }}

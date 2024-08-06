@@ -3,6 +3,7 @@ import { useEffect, useContext } from "react";
 import { AuthContext } from "./context/auth-context";
 
 import { Login } from "./views/Login";
+import { SignUp } from "./views/SignUp";
 import { Workout } from "./views/Workout";
 
 export function App() {
@@ -18,6 +19,7 @@ export function App() {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
       <Route path="/workout" element={currentUser ? <Workout /> : <Login />} />
     </Routes>
   );
