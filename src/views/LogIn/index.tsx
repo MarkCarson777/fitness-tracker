@@ -47,7 +47,9 @@ export function Login() {
             </Form>
             <div className="flex gap-1 text-xs">
               <span>Don't have an account?</span>
-              <Link to="/signup">Sign Up</Link>
+              <Link className="underline" to="/signup">
+                Sign Up
+              </Link>
             </div>
           </>
         )}

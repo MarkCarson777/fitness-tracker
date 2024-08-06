@@ -1,7 +1,12 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Link } from "react-router-dom";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
 import { signUpUser } from "../../firebase/auth";
+
+import { Button } from "../../components/Button";
+import { FormError } from "../../components/FormError";
+import { FormInput } from "../../components/FormInput";
 
 const SignUpSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -10,24 +15,38 @@ const SignUpSchema = Yup.object().shape({
 
 export function SignUp() {
   return (
-    <Formik
-      initialValues={{ email: "", password: "" }}
-      validationSchema={SignUpSchema}
-      onSubmit={(values) => {
-        signUpUser(values.email, values.password);
-      }}
-    >
-      {({ isSubmitting }) => (
-        <Form className="flex flex-col border-2 w-fit">
-          <Field type="email" name="email" />
-          <ErrorMessage name="email" component="div" />
-          <Field type="password" name="password" />
-          <ErrorMessage name="password" component="div" />
-          <button className="w-fit" type="submit" disabled={isSubmitting}>
-            Sign Up
-          </button>
-        </Form>
-      )}
-    </Formik>
+    <div className="flex flex-col h-screen w-full justify-center items-center gap-2">
+      <Formik
+        initialValues={{ email: "", password: "" }}
+        validationSchema={SignUpSchema}
+        onSubmit={(values) => {
+          signUpUser(values.email, values.password);
+        }}
+      >
+        {({ isSubmitting }) => (
+          <>
+            <Form className="flex flex-col w-fit gap-2">
+              <div>
+                <FormInput type="email" name="email" />
+                <FormError name="email" component="div" />
+              </div>
+              <div>
+                <FormInput type="password" name="password" />
+                <FormError name="password" component="div" />
+              </div>
+              <Button type="submit" disabled={isSubmitting}>
+                <span>Sign Up</span>
+              </Button>
+            </Form>
+            <div className="flex gap-1 text-xs">
+              <span>Already have an account?</span>
+              <Link className="underline" to="/">
+                Log In
+              </Link>
+            </div>
+          </>
+        )}
+      </Formik>
+    </div>
   );
 }
