@@ -43,20 +43,33 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     return unsubscribe;
   }, [setCurrentUser]);
 
-  const signUpUser = (email: string, password: string) => {
-    _signUpUser(email, password);
-    navigate("/workout");
+  const signUpUser = async (email, password) => {
+    try {
+      await _signUpUser(email, password);
+      navigate("/workout");
+    } catch (error) {
+      console.error("Error signing up:", error);
+    }
   };
 
-  const signInUser = (email: string, password: string) => {
-    _signInUser(email, password);
-    navigate("/workout");
+  const signInUser = async (email: string, password: string) => {
+    try {
+      await _signInUser(email, password);
+      navigate("/workout");
+    } catch (error) {
+      console.error("Error signing in:", error);
+    }
   };
 
-  const signOutUser = () => {
-    _signOutUser();
-    setCurrentUser(null);
-    navigate("/");
+  const signOutUser = async () => {
+    try {
+      _signOutUser().then(() => {
+        setCurrentUser(null);
+        navigate("/");
+      });
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
   };
 
   return (
