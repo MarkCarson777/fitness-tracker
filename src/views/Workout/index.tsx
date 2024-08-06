@@ -1,12 +1,14 @@
 import { SignOutButton } from "../../components/SignOutButton";
 
+import { WorkoutRecord } from "../../containers/WorkoutRecord";
+
 export function Workout() {
   return (
     <div className="w-full">
       <div className="w-full flex justify-end">
         <SignOutButton />
       </div>
-      <h1>Workout</h1>
+      <WorkoutRecord />
     </div>
   );
 }
