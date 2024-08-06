@@ -8,5 +8,5 @@ type FormInputProps = {
 };
 
 export function FormInput(props: FormInputProps) {
-  return <Field className="border-2 border-black rounded" {...props} />;
+  return <Field className="border-2 border-black" {...props} />;
 }
