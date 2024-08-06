@@ -1,6 +1,11 @@
 import { User } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { signInUser, signOutUser, userStateListener } from "../firebase/auth";
+import {
+  _signUpUser,
+  _signInUser,
+  _signOutUser,
+  userStateListener,
+} from "../firebase/auth";
 import { createContext, useState, useEffect, ReactNode } from "react";
 
 type AuthProviderProps = {
@@ -10,6 +15,7 @@ type AuthProviderProps = {
 export const AuthContext = createContext({
   currentUser: {} as User | null,
   setCurrentUser: (_user: User) => {},
+  signUpUser: (_email: string, _password: string) => {},
   signIn: (_email: string, _password: string) => {},
   signOut: () => {},
 });
@@ -37,13 +43,18 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     return unsubscribe;
   }, [setCurrentUser]);
 
-  const signIn = (email: string, password: string) => {
-    signInUser(email, password);
+  const signUpUser = (email: string, password: string) => {
+    _signUpUser(email, password);
     navigate("/workout");
   };
 
-  const signOut = () => {
-    signOutUser();
+  const signInUser = (email: string, password: string) => {
+    _signInUser(email, password);
+    navigate("/workout");
+  };
+
+  const signOutUser = () => {
+    _signOutUser();
     setCurrentUser(null);
     navigate("/");
   };
@@ -53,8 +64,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       value={{
         currentUser,
         setCurrentUser,
-        signIn,
-        signOut,
+        signUpUser,
+        signInUser,
+        signOutUser,
       }}
     >
       {children}

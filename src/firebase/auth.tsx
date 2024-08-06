@@ -7,7 +7,7 @@ import {
 } from "firebase/auth";
 import { auth } from "./config";
 
-export const signInUser = async (email: string, password: string) => {
+export const _signInUser = async (email: string, password: string) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
     console.log("Successfully signed in");
@@ -16,7 +16,7 @@ export const signInUser = async (email: string, password: string) => {
   }
 };
 
-export const signUpUser = async (email: string, password: string) => {
+export const _signUpUser = async (email: string, password: string) => {
   try {
     await createUserWithEmailAndPassword(auth, email, password);
     console.log("Successfully signed up");
@@ -25,7 +25,7 @@ export const signUpUser = async (email: string, password: string) => {
   }
 };
 
-export const signOutUser = async () => {
+export const _signOutUser = async () => {
   try {
     await signOut(auth);
     console.log("Successfully signed out");

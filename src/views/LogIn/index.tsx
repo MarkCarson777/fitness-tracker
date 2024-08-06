@@ -15,7 +15,7 @@ const SignupSchema = Yup.object().shape({
 });
 
 export function Login() {
-  const { signIn } = useContext(AuthContext);
+  const { signInUser } = useContext(AuthContext);
 
   return (
     <div className="flex flex-col h-screen w-full justify-center items-center gap-2">
@@ -23,7 +23,7 @@ export function Login() {
         initialValues={{ email: "", password: "" }}
         validationSchema={SignupSchema}
         onSubmit={(values) => {
-          signIn(values.email, values.password);
+          signInUser(values.email, values.password);
         }}
       >
         {({ isSubmitting }) => (
