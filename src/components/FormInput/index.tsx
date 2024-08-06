@@ -1,12 +1,23 @@
+import clsx from "clsx";
+
 import { Field } from "formik";
 
 type FormInputProps = {
   name: string;
   type: string;
   autoComplete: string;
-  [key: string]: any;
+  className?: string;
 };
 
 export function FormInput(props: FormInputProps) {
-  return <Field className="border-2 border-black" {...props} />;
+  const { name, type, autoComplete, className } = props;
+
+  return (
+    <Field
+      name={name}
+      type={type}
+      autoComplete={autoComplete}
+      className={clsx("border-2 border-black", className)}
+    />
+  );
 }

@@ -1,10 +1,11 @@
 import { useContext } from "react";
-import { Formik, Form, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
 import { AuthContext } from "../../context/auth-context";
 
 import { Button } from "../../components/Button";
+import { FormError } from "../../components/FormError";
 import { FormInput } from "../../components/FormInput";
 
 const SignupSchema = Yup.object().shape({
@@ -27,14 +28,14 @@ export function Login() {
         {({ isSubmitting }) => (
           <Form className="flex flex-col w-fit gap-2">
             <FormInput type="email" name="email" autoComplete="email" />
-            <ErrorMessage name="email" component="div" />
+            <FormError name="email" component="div" />
             <FormInput
               type="password"
               name="password"
               autoComplete="current-password"
             />
-            <ErrorMessage name="password" component="div" />
-            <Button type="submit" disabled={isSubmitting} label="Log in">
+            <FormError name="password" component="div" />
+            <Button type="submit" disabled={isSubmitting}>
               <span>Log In</span>
             </Button>
           </Form>
