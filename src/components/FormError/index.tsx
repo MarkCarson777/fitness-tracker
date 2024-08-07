@@ -13,7 +13,7 @@ export function FormError(props: FormErrorProps) {
 
   return (
     <ErrorMessage
-      className={clsx("text-xs text-red-500", className)}
+      className={clsx("text-xs text-[#d95644]", className)}
       name={name}
       component={component}
     />

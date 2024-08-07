@@ -10,8 +10,10 @@ import { FormError } from "../../components/FormError";
 import { FormInput } from "../../components/FormInput";
 
 const SignupSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Required"),
-  password: Yup.string().required("Required"),
+  email: Yup.string()
+    .email("Please enter a valid email address")
+    .required("An email address is required"),
+  password: Yup.string().required("A password is required"),
 });
 
 export function Login() {
@@ -26,35 +28,36 @@ export function Login() {
           signInUser(values.email, values.password);
         }}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, errors }) => (
           <>
-            <Form className="flex flex-col w-fit gap-3">
+            <Form className="flex flex-col w-fit gap-2">
               <div className="flex flex-col gap-1">
-                <label htmlFor="email">Email</label>
                 <FormInput
                   type="email"
                   name="email"
+                  label="Email"
                   autoComplete="email"
-                  placeholder="Email"
-                  className="min-w-[320px] rounded-sm"
+                  placeholder="Enter your email address..."
+                  className="min-w-[320px] rounded-sm text-[#000]"
                   aria-labelledby="email-label"
+                  error={errors.email}
                 />
-                <FormError name="email" component="div" />
               </div>
               <div className="flex flex-col gap-1">
-                <label htmlFor="password">Password</label>
                 <FormInput
                   type="password"
                   name="password"
+                  label="Password"
                   autoComplete="current-password"
-                  placeholder="Password"
-                  className="min-w-[320px] rounded-sm"
+                  placeholder="Enter your password..."
+                  className="min-w-[320px] rounded-sm text-[#000]"
                   aria-labelledby="password-label"
+                  error={errors.password}
                 />
-                <FormError name="password" component="div" />
+                {/* <FormError name="password" component="div" /> */}
               </div>
               <Button
-                className="h-[48px] bg-[#3163d9]"
+                className="h-[48px] bg-[#3a76eb] font-semibold mt-4"
                 type="submit"
                 disabled={isSubmitting}
                 aria-live="polite"
@@ -62,10 +65,10 @@ export function Login() {
                 <span>Log In</span>
               </Button>
             </Form>
-            <div className="flex gap-1 text-xs">
+            <div className="flex gap-1 text-xs mt-1">
               <span>Don't have an account?</span>
               <Link
-                className="underline"
+                className="text-[#3a76eb] underline"
                 to="/signup"
                 aria-label="Sign up for an account"
               >
