@@ -11,7 +11,7 @@ export function Set(props) {
   const { setNumber, className } = props;
 
   return (
-    <div className={clsx(className)}>
+    <div className={clsx("flex flex-col", className)}>
       <FormInput
         type="number"
         name={`weight${setNumber}`}
