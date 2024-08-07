@@ -21,7 +21,7 @@ export function FormInput(props: FormInputProps) {
       value={value}
       placeholder={placeholder}
       autoComplete={autoComplete}
-      className={clsx("border-2 border-black", className)}
+      className={clsx("border-2 border-black pl-3 h-[48px]", className)}
     />
   );
 }

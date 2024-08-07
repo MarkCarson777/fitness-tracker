@@ -16,10 +16,7 @@ export function Button(props: ButtonProps) {
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={clsx(
-        "flex justify-center items-center border-2 border-blue-500 rounded",
-        className
-      )}
+      className={clsx("flex justify-center items-center rounded", className)}
     >
       {children}
     </button>

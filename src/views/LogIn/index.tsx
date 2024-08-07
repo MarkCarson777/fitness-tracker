@@ -28,20 +28,32 @@ export function Login() {
       >
         {({ isSubmitting }) => (
           <>
-            <Form className="flex flex-col w-fit gap-2">
-              <div>
-                <FormInput type="email" name="email" autoComplete="email" />
+            <Form className="flex flex-col w-fit gap-3">
+              <div className="flex flex-col gap-1">
+                <FormInput
+                  type="email"
+                  name="email"
+                  autoComplete="email"
+                  placeholder="Email"
+                  className="min-w-[320px] rounded-sm"
+                />
                 <FormError name="email" component="div" />
               </div>
-              <div>
+              <div className="flex flex-col gap-1">
                 <FormInput
                   type="password"
                   name="password"
                   autoComplete="current-password"
+                  placeholder="Password"
+                  className="min-w-[320px] rounded-sm"
                 />
                 <FormError name="password" component="div" />
               </div>
-              <Button type="submit" disabled={isSubmitting}>
+              <Button
+                className="h-[48px] bg-[#3163d9]"
+                type="submit"
+                disabled={isSubmitting}
+              >
                 <span>Log In</span>
               </Button>
             </Form>
