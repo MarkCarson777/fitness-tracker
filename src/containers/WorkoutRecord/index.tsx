@@ -1,21 +1,28 @@
-import { Form, Formik } from "formik";
+import { useState, useEffect } from "react";
+
+import { Form, Formik, FieldArray } from "formik";
 
 import { Button } from "../../components/Button";
+import { Exercise } from "../../components/Exercise";
 import { FormInput } from "../../components/FormInput";
-import { Set } from "../../components/Set";
 
 export function WorkoutRecord() {
-  const sets = ["1", "2", "3", "4", "5", "6"];
+  const [exercises, setExercises] = useState([{ id: 1 }]);
+
+  useEffect(() => {
+    console.log(exercises);
+  }, [exercises]);
 
   return (
     <Formik
-      initialValues={{}}
-      validationSchema={{}}
+      initialValues={{
+        exercises: exercises,
+      }}
       onSubmit={(values) => {
         console.log("formValues", values);
       }}
     >
-      {({ isSubmitting }) => (
+      {({ isSubmitting, values }) => (
         <Form className="flex flex-col">
           <div className="flex">
             <div className="flex flex-col">
@@ -27,14 +34,25 @@ export function WorkoutRecord() {
               <FormInput type="time" name="finish" />
             </div>
           </div>
-          <div className="flex">
-            <FormInput type="text" name="exerciseName" placeholder="Exercise" />
-            <div className="flex">
-              {sets.map((set, index) => (
-                <Set setNumber={index + 1} />
-              ))}
-            </div>
-          </div>
+          <FieldArray name="exercises">
+            {({ push }) => (
+              <div>
+                {values.exercises.map((exercise, index) => (
+                  <Exercise key={index} index={index} />
+                ))}
+                <Button
+                  type="button"
+                  onClick={() => {
+                    const newExercise = { id: values.exercises.length + 1 };
+                    setExercises([...exercises, newExercise]);
+                    push(newExercise);
+                  }}
+                >
+                  Add
+                </Button>
+              </div>
+            )}
+          </FieldArray>
           <Button type="submit" disabled={isSubmitting}>
             <span>Save</span>
           </Button>
