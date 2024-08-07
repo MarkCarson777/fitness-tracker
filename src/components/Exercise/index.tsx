@@ -12,8 +12,9 @@ export function Exercise(props) {
     <div className="flex">
       <FormInput
         type="text"
-        name={`exercises.${index}.exerciseName`}
+        name={`exercises[${index}].exerciseName`}
         placeholder="Exercise"
+        value={exercise.exerciseName}
       />
       <FieldArray name={`exercises.${index}.sets`}>
         {({ push: pushSet }) => (

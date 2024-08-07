@@ -7,7 +7,9 @@ import { Exercise } from "../../components/Exercise";
 import { FormInput } from "../../components/FormInput";
 
 export function WorkoutRecord() {
-  const [exercises, setExercises] = useState([{ id: 1, sets: [{ id: 1 }] }]);
+  const [exercises, setExercises] = useState([
+    { id: 1, exerciseName: "", sets: [{ id: 1 }] },
+  ]);
 
   useEffect(() => {
     console.log("exercises", exercises);
@@ -63,6 +65,7 @@ export function WorkoutRecord() {
                   onClick={() => {
                     const newExercise = {
                       id: values.exercises.length + 1,
+                      name: "",
                       sets: [{ id: 1 }],
                     };
                     setExercises([...exercises, newExercise]);
