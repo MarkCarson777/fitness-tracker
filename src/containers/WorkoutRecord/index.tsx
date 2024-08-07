@@ -7,10 +7,10 @@ import { Exercise } from "../../components/Exercise";
 import { FormInput } from "../../components/FormInput";
 
 export function WorkoutRecord() {
-  const [exercises, setExercises] = useState([{ id: 1 }]);
+  const [exercises, setExercises] = useState([{ id: 1, sets: [{ id: 1 }] }]);
 
   useEffect(() => {
-    console.log(exercises);
+    console.log("exercises", exercises);
   }, [exercises]);
 
   return (
@@ -38,12 +38,20 @@ export function WorkoutRecord() {
             {({ push }) => (
               <div>
                 {values.exercises.map((exercise, index) => (
-                  <Exercise key={index} index={index} />
+                  <Exercise
+                    key={index}
+                    index={index}
+                    exercise={exercise}
+                    setExercises={setExercises}
+                  />
                 ))}
                 <Button
                   type="button"
                   onClick={() => {
-                    const newExercise = { id: values.exercises.length + 1 };
+                    const newExercise = {
+                      id: values.exercises.length + 1,
+                      sets: [{ id: 1 }],
+                    };
                     setExercises([...exercises, newExercise]);
                     push(newExercise);
                   }}
