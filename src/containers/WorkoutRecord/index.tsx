@@ -18,6 +18,8 @@ export function WorkoutRecord() {
       initialValues={{
         date: "",
         workoutName: "",
+        startTime: "",
+        endTime: "",
         exercises: exercises,
       }}
       onSubmit={(values) => {
@@ -37,8 +39,12 @@ export function WorkoutRecord() {
               />
             </div>
             <div className="flex flex-col">
-              <FormInput type="time" name="start" />
-              <FormInput type="time" name="finish" />
+              <FormInput
+                type="time"
+                name="startTime"
+                value={values.startTime}
+              />
+              <FormInput type="time" name="endTime" value={values.endTime} />
             </div>
           </div>
           <FieldArray name="exercises">
