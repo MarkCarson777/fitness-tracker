@@ -16,6 +16,7 @@ export function WorkoutRecord() {
   return (
     <Formik
       initialValues={{
+        date: "",
         exercises: exercises,
       }}
       onSubmit={(values) => {
@@ -26,7 +27,7 @@ export function WorkoutRecord() {
         <Form className="flex flex-col">
           <div className="flex">
             <div className="flex flex-col">
-              <FormInput type="date" name="date" />
+              <FormInput type="date" name="date" value={values.date} />
               <FormInput type="text" name="name" placeholder="Workout Name" />
             </div>
             <div className="flex flex-col">

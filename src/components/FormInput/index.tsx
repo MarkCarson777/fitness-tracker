@@ -11,12 +11,13 @@ type FormInputProps = {
 };
 
 export function FormInput(props: FormInputProps) {
-  const { name, type, placeholder, autoComplete, className } = props;
+  const { value, name, type, placeholder, autoComplete, className } = props;
 
   return (
     <Field
       name={name}
       type={type}
+      value={value}
       placeholder={placeholder}
       autoComplete={autoComplete}
       className={clsx("border-2 border-black", className)}
