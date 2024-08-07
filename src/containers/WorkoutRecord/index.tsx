@@ -43,7 +43,7 @@ export function WorkoutRecord() {
                 <Button
                   type="button"
                   onClick={() => {
-                    const addExercise = { id: values.exercises.length + 1 };
+                    const newExercise = { id: values.exercises.length + 1 };
                     setExercises([...exercises, newExercise]);
                     push(newExercise);
                   }}
