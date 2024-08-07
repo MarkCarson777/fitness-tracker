@@ -8,7 +8,7 @@ import { FormInput } from "../../components/FormInput";
 
 export function WorkoutRecord() {
   const [exercises, setExercises] = useState([
-    { id: 1, exerciseName: "", sets: [{ id: 1 }] },
+    { id: 1, exerciseName: "", sets: [{ id: 1, weight: "", reps: "" }] },
   ]);
 
   useEffect(() => {
@@ -32,21 +32,16 @@ export function WorkoutRecord() {
         <Form className="flex flex-col">
           <div className="flex">
             <div className="flex flex-col">
-              <FormInput type="date" name="date" value={values.date} />
+              <FormInput type="date" name="date" />
               <FormInput
                 type="text"
                 name="workoutName"
                 placeholder="Workout Name"
-                value={values.workoutName}
               />
             </div>
             <div className="flex flex-col">
-              <FormInput
-                type="time"
-                name="startTime"
-                value={values.startTime}
-              />
-              <FormInput type="time" name="endTime" value={values.endTime} />
+              <FormInput type="time" />
+              <FormInput type="time" name="endTime" />
             </div>
           </div>
           <FieldArray name="exercises">
@@ -65,8 +60,8 @@ export function WorkoutRecord() {
                   onClick={() => {
                     const newExercise = {
                       id: values.exercises.length + 1,
-                      name: "",
-                      sets: [{ id: 1 }],
+                      exerciseName: "",
+                      sets: [{ id: 1, weight: "", reps: "" }],
                     };
                     setExercises([...exercises, newExercise]);
                     push(newExercise);

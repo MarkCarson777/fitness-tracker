@@ -16,16 +16,25 @@ export function Exercise(props) {
         placeholder="Exercise"
         value={exercise.exerciseName}
       />
-      <FieldArray name={`exercises.${index}.sets`}>
+      <FieldArray name={`exercises[${index}].sets`}>
         {({ push: pushSet }) => (
           <div className="flex">
             {exercise.sets.map((set, setIndex) => (
-              <Set key={setIndex} setNumber={setIndex + 1} />
+              <Set
+                key={setIndex}
+                set={set}
+                exIndex={index}
+                setIndex={setIndex}
+              />
             ))}
             <Button
               type="button"
               onClick={() => {
-                const newSet = { id: exercise.sets.length + 1 };
+                const newSet = {
+                  id: exercise.sets.length + 1,
+                  weight: "",
+                  reps: "",
+                };
                 const updatedExercises = [...exercise.sets, newSet];
 
                 setExercises((prevExercises) =>

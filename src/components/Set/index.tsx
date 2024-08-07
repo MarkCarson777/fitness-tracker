@@ -8,19 +8,21 @@ type SetProps = {
 };
 
 export function Set(props) {
-  const { setNumber, className } = props;
+  const { set, exIndex, setIndex, className } = props;
 
   return (
     <div className={clsx("flex flex-col", className)}>
       <FormInput
         type="number"
-        name={`weight${setNumber}`}
-        placeholder={`Weight${setNumber}`}
+        name={`weight${setIndex}`}
+        placeholder={`Weight${setIndex}`}
+        name={`exercises[${exIndex}].sets[${setIndex}].weight`}
       />
       <FormInput
         type="number"
-        name={`reps${setNumber}`}
-        placeholder={`Reps${setNumber}`}
+        name={`reps${setIndex}`}
+        placeholder={`Reps${setIndex}`}
+        name={`exercises[${exIndex}].sets[${setIndex}].reps`}
       />
     </div>
   );
