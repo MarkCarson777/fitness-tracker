@@ -18,7 +18,7 @@ export function Login() {
   const { signInUser } = useContext(AuthContext);
 
   return (
-    <div className="flex flex-col h-screen w-full justify-center items-center gap-2">
+    <div className="relative flex flex-col h-screen w-full justify-center items-center gap-2 bg-[#16171a] text-[#ffffff]">
       <Formik
         initialValues={{ email: "", password: "" }}
         validationSchema={SignupSchema}
@@ -54,6 +54,10 @@ export function Login() {
           </>
         )}
       </Formik>
+      <div className="absolute left-8 bottom-8 flex flex-col text-9xl">
+        <span>Fit</span>
+        <span>Tracker.</span>
+      </div>
     </div>
   );
 }
