@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import { onCreateDocument } from "../../firebase/firebase-actions.tsx";
+
 import { Form, Formik, FieldArray } from "formik";
 
 import { Button } from "../../components/Button";
@@ -15,6 +17,11 @@ export function WorkoutRecord() {
     console.log("exercises", exercises);
   }, [exercises]);
 
+  const onSubmit = (values) => {
+    console.log("values", values);
+    onCreateDocument(values);
+  };
+
   return (
     <Formik
       initialValues={{
@@ -24,9 +31,7 @@ export function WorkoutRecord() {
         endTime: "",
         exercises: exercises,
       }}
-      onSubmit={(values) => {
-        console.log("formValues", values);
-      }}
+      onSubmit={(values) => onSubmit(values)}
     >
       {({ isSubmitting, values }) => (
         <Form className="flex flex-col">
