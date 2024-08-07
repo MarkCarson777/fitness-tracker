@@ -5,13 +5,14 @@ import { Field } from "formik";
 type FormInputProps = {
   name: string;
   type: string;
+  value: string;
   placeholder?: string;
   autoComplete?: string;
   className?: string;
 };
 
 export function FormInput(props: FormInputProps) {
-  const { value, name, type, placeholder, autoComplete, className } = props;
+  const { name, type, value, placeholder, autoComplete, className } = props;
 
   return (
     <Field
