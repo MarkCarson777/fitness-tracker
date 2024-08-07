@@ -17,9 +17,13 @@ export function WorkoutRecord() {
     console.log("exercises", exercises);
   }, [exercises]);
 
-  const onSubmit = (values) => {
-    console.log("values", values);
-    onCreateDocument(values);
+  const onSubmit = async (values) => {
+    try {
+      await onCreateDocument(values);
+      console.log("Document successfully written!");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
