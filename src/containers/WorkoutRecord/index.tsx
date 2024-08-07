@@ -43,12 +43,12 @@ export function WorkoutRecord() {
                 <Button
                   type="button"
                   onClick={() => {
-                    const newExercise = { id: values.exercises.length + 1 };
+                    const addExercise = { id: values.exercises.length + 1 };
                     setExercises([...exercises, newExercise]);
                     push(newExercise);
                   }}
                 >
-                  Add
+                  Add exercise
                 </Button>
               </div>
             )}
