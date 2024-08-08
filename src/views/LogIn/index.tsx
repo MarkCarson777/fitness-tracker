@@ -7,6 +7,7 @@ import { AuthContext } from "../../context/auth-context";
 
 import { Button } from "../../components/Button";
 import { FormInput } from "../../components/FormInput";
+import { Icon } from "../../components/Icon";
 
 import { _googleSignIn } from "../../firebase/auth";
 
@@ -65,7 +66,13 @@ export function Login() {
                 <span>Log In</span>
               </Button>
             </Form>
-            <button onClick={() => _googleSignIn()}>Sign in with Google</button>
+            <button
+              className="flex gap-2 bg-[#fff] text-[#000] font-semibold h-[48px] justify-center items-center rounded-full px-[10px] mt-1"
+              onClick={() => _googleSignIn()}
+            >
+              <Icon icon="Google" size={24} />
+              <span className="pb-0.5">Sign in with Google</span>
+            </button>
             <div className="flex gap-1 text-xs mt-1">
               <span>Don't have an account?</span>
               <Link
