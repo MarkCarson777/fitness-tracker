@@ -1,4 +1,4 @@
-import { onCreateDocument } from "../../firebase/firebase-actions.tsx";
+import { createWorkout } from "../../firebase/firebase-actions.tsx";
 
 import { v4 as uuidv4 } from "uuid";
 import { Form, Formik, FieldArray } from "formik";
@@ -25,8 +25,8 @@ export function WorkoutRecord() {
       }}
       onSubmit={async (values) => {
         try {
-          await onCreateDocument(values);
-          console.log("Document successfully written!");
+          await createWorkout(values);
+          console.log("Workout created successfully");
         } catch (error) {
           console.log(error);
         }
