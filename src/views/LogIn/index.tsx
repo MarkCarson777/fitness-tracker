@@ -41,7 +41,7 @@ export function Login() {
                   autoComplete="email"
                   placeholder="Enter your email address..."
                   className="min-w-[320px] rounded-sm text-[#000]"
-                  aria-labelledby="email-label"
+                  aria-label="Email"
                   error={errors.email}
                 />
               </div>
@@ -53,7 +53,7 @@ export function Login() {
                   autoComplete="current-password"
                   placeholder="Enter your password..."
                   className="min-w-[320px] rounded-sm text-[#000]"
-                  aria-labelledby="password-label"
+                  aria-label="Password"
                   error={errors.password}
                 />
               </div>
@@ -67,6 +67,7 @@ export function Login() {
               </Button>
             </Form>
             <button
+              aria-label="Sign in with Google"
               className="flex gap-2 bg-[#fff] text-[#000] font-semibold h-[48px] justify-center items-center rounded-full px-[10px] mt-1"
               onClick={() => _googleSignIn()}
             >

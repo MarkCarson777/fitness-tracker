@@ -3,26 +3,25 @@ import clsx from "clsx";
 import { FormInput } from "../FormInput";
 
 type SetProps = {
-  setNumber: string;
+  setIndex: number;
+  exerciseIndex: number;
   className?: string;
 };
 
-export function Set(props) {
-  const { set, exIndex, setIndex, className } = props;
+export function Set(props: SetProps) {
+  const { setIndex, exerciseIndex, className } = props;
 
   return (
     <div className={clsx("flex flex-col", className)}>
       <FormInput
         type="number"
-        name={`weight${setIndex}`}
-        placeholder={`Weight${setIndex}`}
-        name={`exercises[${exIndex}].sets[${setIndex}].weight`}
+        placeholder="Weight"
+        name={`exercises[${exerciseIndex}].sets[${setIndex}].weight`}
       />
       <FormInput
         type="number"
-        name={`reps${setIndex}`}
-        placeholder={`Reps${setIndex}`}
-        name={`exercises[${exIndex}].sets[${setIndex}].reps`}
+        placeholder="Reps"
+        name={`exercises[${exerciseIndex}].sets[${setIndex}].reps`}
       />
     </div>
   );
