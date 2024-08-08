@@ -1,29 +1,40 @@
-import { useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
 import { FieldArray } from "formik";
 
 import { Button } from "../Button";
 import { FormInput } from "../FormInput";
 import { Set } from "../Set";
 
-export function Exercise(props) {
-  const { exercise, setExercises, index } = props;
+type ExerciseProps = {
+  exercise: {
+    id: string;
+    exerciseName: string;
+    sets: {
+      id: number;
+      weight: string;
+      reps: string;
+    }[];
+  };
+  exerciseIndex: number;
+};
+
+export function Exercise(props: ExerciseProps) {
+  const { exercise, exerciseIndex } = props;
 
   return (
     <div className="flex">
       <FormInput
         type="text"
-        name={`exercises[${index}].exerciseName`}
+        name={`exercises[${exerciseIndex}].exerciseName`}
         placeholder="Exercise"
-        value={exercise.exerciseName}
       />
-      <FieldArray name={`exercises[${index}].sets`}>
-        {({ push: pushSet }) => (
+      <FieldArray name={`exercises[${exerciseIndex}].sets`}>
+        {({ push }) => (
           <div className="flex">
             {exercise.sets.map((set, setIndex) => (
               <Set
                 key={setIndex}
-                set={set}
-                exIndex={index}
+                exerciseIndex={exerciseIndex}
                 setIndex={setIndex}
               />
             ))}
@@ -31,18 +42,12 @@ export function Exercise(props) {
               type="button"
               onClick={() => {
                 const newSet = {
-                  id: exercise.sets.length + 1,
+                  id: uuidv4(),
                   weight: "",
                   reps: "",
                 };
-                const updatedExercises = [...exercise.sets, newSet];
 
-                setExercises((prevExercises) =>
-                  prevExercises.map((ex, exIndex) =>
-                    exIndex === index ? { ...ex, sets: updatedExercises } : ex
-                  )
-                );
-                pushSet(newSet);
+                push(newSet);
               }}
             >
               <span>Add set</span>
