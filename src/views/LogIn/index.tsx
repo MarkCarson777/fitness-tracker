@@ -1,15 +1,13 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
-import { AuthContext } from "../../context/auth-context";
+import { AuthContext } from "../../contexts/AuthContext";
 
 import { Button } from "../../components/Button";
 import { FormInput } from "../../components/FormInput";
 import { Icon } from "../../components/Icon";
-
-import { _googleSignIn } from "../../firebase/auth";
 
 const SignupSchema = Yup.object().shape({
   email: Yup.string()
@@ -19,15 +17,17 @@ const SignupSchema = Yup.object().shape({
 });
 
 export function Login() {
-  const { signInUser } = useContext(AuthContext);
+  const { googleSignIn, signInUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   return (
     <div className="relative flex flex-col h-screen w-full justify-center items-center gap-2 bg-[#16171a] text-[#ffffff]">
       <Formik
         initialValues={{ email: "", password: "" }}
         validationSchema={SignupSchema}
-        onSubmit={(values) => {
-          signInUser(values.email, values.password);
+        onSubmit={async (values) => {
+          await signInUser(values.email, values.password);
+          navigate("/workout");
         }}
       >
         {({ isSubmitting, errors }) => (
@@ -69,7 +69,10 @@ export function Login() {
             <button
               aria-label="Sign in with Google"
               className="flex gap-2 bg-[#fff] text-[#000] font-semibold h-[48px] justify-center items-center rounded-full px-[10px] mt-1"
-              onClick={() => _googleSignIn()}
+              onClick={async () => {
+                await googleSignIn();
+                navigate("/workout");
+              }}
             >
               <Icon icon="Google" size={24} />
               <span className="pb-0.5">Sign in with Google</span>

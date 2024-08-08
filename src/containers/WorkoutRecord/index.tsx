@@ -1,4 +1,5 @@
-import { createWorkout } from "../../firebase/firebase-actions.tsx";
+import { useContext } from "react";
+import { WorkoutContext } from "../../contexts/WorkoutContext";
 
 import { v4 as uuidv4 } from "uuid";
 import { Form, Formik, FieldArray } from "formik";
@@ -8,6 +9,8 @@ import { Exercise } from "../../components/Exercise";
 import { FormInput } from "../../components/FormInput";
 
 export function WorkoutRecord() {
+  const { createWorkout } = useContext(WorkoutContext);
+
   return (
     <Formik
       initialValues={{
@@ -17,7 +20,7 @@ export function WorkoutRecord() {
         endTime: "",
         exercises: [
           {
-            id: 1,
+            id: uuidv4(),
             exerciseName: "",
             sets: [{ id: uuidv4(), weight: "", reps: "" }],
           },

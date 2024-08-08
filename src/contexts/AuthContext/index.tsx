@@ -1,23 +1,33 @@
 import { User } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 import {
-  _signUpUser,
-  _signInUser,
-  _signOutUser,
+  signUpUser as signUpUserService,
+  signInUser as signInUserService,
+  signOutUser as signOutUserService,
   userStateListener,
-} from "../firebase/auth";
+  googleSignIn as googleSignInService,
+} from "../../firebase/authService";
 import { createContext, useState, useEffect, ReactNode } from "react";
 
 type AuthProviderProps = {
   children?: ReactNode;
 };
 
-export const AuthContext = createContext({
+type AuthContextType = {
+  currentUser: User | null;
+  setCurrentUser: (user: User | null) => void;
+  signUpUser: (email: string, password: string) => void;
+  signInUser: (email: string, password: string) => void;
+  signOutUser: () => void;
+  googleSignIn: () => void;
+};
+
+export const AuthContext = createContext<AuthContextType>({
   currentUser: {} as User | null,
-  setCurrentUser: (_user: User) => {},
-  signUpUser: (_email: string, _password: string) => {},
-  signInUser: (_email: string, _password: string) => {},
+  setCurrentUser: (user: User) => {},
+  signUpUser: (email: string, password: string) => {},
+  signInUser: (email: string, password: string) => {},
   signOutUser: () => {},
+  googleSignIn: () => {},
 });
 
 const getStoredUser = () => {
@@ -27,7 +37,6 @@ const getStoredUser = () => {
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [currentUser, setCurrentUser] = useState<User | null>(getStoredUser);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = userStateListener((user) => {
@@ -45,8 +54,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const signUpUser = async (email: string, password: string) => {
     try {
-      await _signUpUser(email, password);
-      navigate("/workout");
+      await signUpUserService(email, password);
     } catch (error) {
       console.error("Error signing up:", error);
     }
@@ -54,8 +62,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const signInUser = async (email: string, password: string) => {
     try {
-      await _signInUser(email, password);
-      navigate("/workout");
+      await signInUserService(email, password);
     } catch (error) {
       console.error("Error signing in:", error);
     }
@@ -63,12 +70,17 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const signOutUser = async () => {
     try {
-      _signOutUser().then(() => {
-        setCurrentUser(null);
-        navigate("/");
-      });
+      signOutUserService();
     } catch (error) {
       console.error("Error signing out:", error);
+    }
+  };
+
+  const googleSignIn = async () => {
+    try {
+      googleSignInService();
+    } catch (error) {
+      console.error("Error signing in with Google:", error);
     }
   };
 
@@ -80,6 +92,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         signUpUser,
         signInUser,
         signOutUser,
+        googleSignIn,
       }}
     >
       {children}

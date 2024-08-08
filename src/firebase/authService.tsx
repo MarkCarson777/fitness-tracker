@@ -9,19 +9,16 @@ import {
 } from "firebase/auth";
 import { auth, provider } from "./config";
 
-export const _googleSignIn = async () => {
+export const googleSignIn = async () => {
   try {
-    const result = await signInWithPopup(auth, provider);
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential?.accessToken;
-    const user = result.user;
-    console.log("Successfully signed in with Google", token, user);
+    await signInWithPopup(auth, provider);
+    console.log("Successfully signed in with Google");
   } catch (error) {
     console.error("Error signing in with Google:", error);
   }
 };
 
-export const _signInUser = async (email: string, password: string) => {
+export const signInUser = async (email: string, password: string) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
     console.log("Successfully signed in");
@@ -30,7 +27,7 @@ export const _signInUser = async (email: string, password: string) => {
   }
 };
 
-export const _signUpUser = async (email: string, password: string) => {
+export const signUpUser = async (email: string, password: string) => {
   try {
     await createUserWithEmailAndPassword(auth, email, password);
     console.log("Successfully signed up");
@@ -39,7 +36,7 @@ export const _signUpUser = async (email: string, password: string) => {
   }
 };
 
-export const _signOutUser = async () => {
+export const signOutUser = async () => {
   try {
     await signOut(auth);
     console.log("Successfully signed out");

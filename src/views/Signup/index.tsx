@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
@@ -7,7 +7,7 @@ import { Button } from "../../components/Button";
 import { FormError } from "../../components/FormError";
 import { FormInput } from "../../components/FormInput";
 
-import { AuthContext } from "../../context/auth-context";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const SignUpSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -16,14 +16,16 @@ const SignUpSchema = Yup.object().shape({
 
 export function SignUp() {
   const { signUpUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   return (
     <div className="flex flex-col h-screen w-full justify-center items-center gap-2">
       <Formik
         initialValues={{ email: "", password: "" }}
         validationSchema={SignUpSchema}
-        onSubmit={(values) => {
-          signUpUser(values.email, values.password);
+        onSubmit={async (values) => {
+          await signUpUser(values.email, values.password);
+          navigate("/workout");
         }}
       >
         {({ isSubmitting }) => (
