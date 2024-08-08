@@ -16,8 +16,8 @@ export const AuthContext = createContext({
   currentUser: {} as User | null,
   setCurrentUser: (_user: User) => {},
   signUpUser: (_email: string, _password: string) => {},
-  signIn: (_email: string, _password: string) => {},
-  signOut: () => {},
+  signInUser: (_email: string, _password: string) => {},
+  signOutUser: () => {},
 });
 
 const getStoredUser = () => {
@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     return unsubscribe;
   }, [setCurrentUser]);
 
-  const signUpUser = async (email, password) => {
+  const signUpUser = async (email: string, password: string) => {
     try {
       await _signUpUser(email, password);
       navigate("/workout");

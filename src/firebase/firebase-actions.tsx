@@ -1,7 +1,7 @@
 import { addDoc, collection } from "@firebase/firestore";
 import { firestore } from "./config.tsx";
 
-export const onCreateDocument = (testdata) => {
+export const onCreateDocument = (testdata: {}) => {
   const ref = collection(firestore, "workouts");
   let data = {
     testData: testdata,

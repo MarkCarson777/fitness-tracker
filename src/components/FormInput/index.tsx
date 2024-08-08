@@ -8,7 +8,6 @@ import { FormError } from "../FormError";
 type FormInputProps = {
   name: string;
   type: string;
-  value: string;
   label?: string;
   error?: string;
   placeholder?: string;
@@ -17,16 +16,8 @@ type FormInputProps = {
 };
 
 export function FormInput(props: FormInputProps) {
-  const {
-    name,
-    type,
-    value,
-    label,
-    placeholder,
-    error,
-    autoComplete,
-    className,
-  } = props;
+  const { name, type, label, placeholder, error, autoComplete, className } =
+    props;
   const [displayError, setDisplayError] = useState(false);
 
   return (
@@ -43,7 +34,6 @@ export function FormInput(props: FormInputProps) {
         <Field
           name={name}
           type={type}
-          value={value}
           placeholder={placeholder}
           autoComplete={autoComplete}
           className={clsx(

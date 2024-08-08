@@ -6,8 +6,9 @@ import * as Yup from "yup";
 import { AuthContext } from "../../context/auth-context";
 
 import { Button } from "../../components/Button";
-import { FormError } from "../../components/FormError";
 import { FormInput } from "../../components/FormInput";
+
+import { _googleSignIn } from "../../firebase/auth";
 
 const SignupSchema = Yup.object().shape({
   email: Yup.string()
@@ -65,6 +66,7 @@ export function Login() {
                 <span>Log In</span>
               </Button>
             </Form>
+            <button onClick={() => _googleSignIn()}>Sign in with Google</button>
             <div className="flex gap-1 text-xs mt-1">
               <span>Don't have an account?</span>
               <Link
