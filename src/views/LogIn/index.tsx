@@ -55,7 +55,6 @@ export function Login() {
                   aria-labelledby="password-label"
                   error={errors.password}
                 />
-                {/* <FormError name="password" component="div" /> */}
               </div>
               <Button
                 className="h-[48px] bg-[#3a76eb] font-semibold mt-4"
