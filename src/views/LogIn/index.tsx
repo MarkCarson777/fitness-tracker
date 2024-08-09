@@ -37,7 +37,7 @@ export function Login() {
                 name="email"
                 autoComplete="email"
                 placeholder="Enter your email address..."
-                className="min-w-80 rounded-sm text-black"
+                className="min-w-80 rounded-sm"
                 aria-label="Email"
               />
               <FormInput

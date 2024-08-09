@@ -4,7 +4,6 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
 import { Button } from "../../components/Button";
-import { FormError } from "../../components/FormError";
 import { FormInput } from "../../components/FormInput";
 
 import { AuthContext } from "../../contexts/AuthContext";
@@ -12,6 +11,10 @@ import { AuthContext } from "../../contexts/AuthContext";
 const SignUpSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
   password: Yup.string().required("Required"),
+  confirmPassword: Yup.string().oneOf(
+    [Yup.ref("password"), null],
+    "Passwords must match"
+  ),
 });
 
 export function SignUp() {
@@ -19,9 +22,9 @@ export function SignUp() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col h-screen w-full justify-center items-center gap-2">
+    <div className="relative gap-2.5 flex flex-col h-screen w-full justify-center items-center bg-black-500">
       <Formik
-        initialValues={{ email: "", password: "" }}
+        initialValues={{ email: "", password: "", confirmPassword: "" }}
         validationSchema={SignUpSchema}
         onSubmit={async (values) => {
           await signUpUser(values.email, values.password);
@@ -30,32 +33,60 @@ export function SignUp() {
       >
         {({ isSubmitting }) => (
           <>
-            <Form className="flex flex-col w-fit gap-2">
-              <div>
-                <FormInput type="email" name="email" autoComplete="email" />
-                <FormError name="email" component="div" />
-              </div>
-              <div>
-                <FormInput
-                  type="password"
-                  name="password"
-                  autoComplete="new-password"
-                />
-                <FormError name="password" component="div" />
-              </div>
-              <Button type="submit" disabled={isSubmitting}>
+            <Form className="flex flex-col w-fit gap-4">
+              <FormInput
+                type="email"
+                name="email"
+                autoComplete="email"
+                placeholder="Enter your email address..."
+                className="min-w-80 rounded-sm"
+                aria-label="Email"
+              />
+              <FormInput
+                type="password"
+                name="password"
+                autoComplete="password"
+                placeholder="Enter a new password..."
+                className="min-w-80 rounded-sm"
+                aria-label="new-password"
+              />
+              <FormInput
+                type="password"
+                name="confirmPassword"
+                autoComplete="confirm-password"
+                placeholder="Confirm your new password..."
+                className="min-w-80 rounded-sm"
+                aria-label="confirm-password"
+              />
+              <Button
+                primary
+                type="submit"
+                disabled={isSubmitting}
+                aria-live="polite"
+                pending={isSubmitting}
+              >
                 <span>Sign Up</span>
               </Button>
             </Form>
             <div className="flex gap-1 text-xs">
-              <span>Already have an account?</span>
-              <Link className="underline" to="/">
+              <span className="text-white">Already have an account?</span>
+              <Link
+                className="text-primary-500 underline hover:no-underline"
+                to="/"
+                aria-label="Log In"
+              >
                 Log In
               </Link>
             </div>
           </>
         )}
       </Formik>
+      <div
+        className="absolute left-8 bottom-8 flex flex-col text-9xl text-white"
+        aria-label="Fit Tracker"
+      >
+        <span>Signup.</span>
+      </div>
     </div>
   );
 }

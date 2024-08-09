@@ -22,7 +22,7 @@ export function Button(props: ButtonProps) {
       onClick={onClick}
       disabled={disabled}
       className={clsx(
-        "flex font-semibold h-12 justify-center items-center rounded-md text-white",
+        "relative flex font-semibold h-12 justify-center items-center rounded-md text-white",
         primary && "bg-primary-500",
         className
       )}
