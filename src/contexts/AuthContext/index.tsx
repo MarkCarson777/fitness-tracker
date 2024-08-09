@@ -1,12 +1,12 @@
 import { User } from "firebase/auth";
 import {
-  signUpUser as signUpUserService,
+  googleSignIn as googleSignInService,
   signInUser as signInUserService,
   signOutUser as signOutUserService,
+  signUpUser as signUpUserService,
   userStateListener,
-  googleSignIn as googleSignInService,
 } from "../../firebase/authService";
-import { createContext, useState, useEffect, ReactNode } from "react";
+import { createContext, useState, useEffect } from "react";
 
 type AuthProviderProps = {
   children?: ReactNode;
@@ -14,20 +14,20 @@ type AuthProviderProps = {
 
 type AuthContextType = {
   currentUser: User | null;
+  googleSignIn: () => void;
   setCurrentUser: (user: User | null) => void;
-  signUpUser: (email: string, password: string) => void;
   signInUser: (email: string, password: string) => void;
   signOutUser: () => void;
-  googleSignIn: () => void;
+  signUpUser: (email: string, password: string) => void;
 };
 
 export const AuthContext = createContext<AuthContextType>({
   currentUser: {} as User | null,
+  googleSignIn: () => {},
   setCurrentUser: (user: User) => {},
-  signUpUser: (email: string, password: string) => {},
   signInUser: (email: string, password: string) => {},
   signOutUser: () => {},
-  googleSignIn: () => {},
+  signUpUser: (email: string, password: string) => {},
 });
 
 const getStoredUser = () => {
@@ -52,11 +52,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     return unsubscribe;
   }, [setCurrentUser]);
 
-  const signUpUser = async (email: string, password: string) => {
+  const googleSignIn = async () => {
     try {
-      await signUpUserService(email, password);
+      googleSignInService();
     } catch (error) {
-      console.error("Error signing up:", error);
+      console.error("Error signing in with Google:", error);
     }
   };
 
@@ -76,11 +76,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
-  const googleSignIn = async () => {
+  const signUpUser = async (email: string, password: string) => {
     try {
-      googleSignInService();
+      await signUpUserService(email, password);
     } catch (error) {
-      console.error("Error signing in with Google:", error);
+      console.error("Error signing up:", error);
     }
   };
 
@@ -88,11 +88,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     <AuthContext.Provider
       value={{
         currentUser,
+        googleSignIn,
         setCurrentUser,
-        signUpUser,
         signInUser,
         signOutUser,
-        googleSignIn,
+        signUpUser,
       }}
     >
       {children}
