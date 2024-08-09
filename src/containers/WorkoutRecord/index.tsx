@@ -90,15 +90,24 @@ export function WorkoutRecord() {
             </div>
           </div>
           <FieldArray name="exercises">
-            {({ push }) => (
+            {({ push, remove }) => (
               <div>
                 {values.exercises.map((exercise, index) => (
-                  <Exercise
-                    key={index}
-                    exercise={exercise}
-                    exerciseIndex={index}
-                    errors={errors}
-                  />
+                  <>
+                    <Exercise
+                      key={index}
+                      exercise={exercise}
+                      exerciseIndex={index}
+                      errors={errors}
+                    />
+                    <Button
+                      color="secondary"
+                      type="button"
+                      onClick={() => remove(index)}
+                    >
+                      <span>Remove</span>
+                    </Button>
+                  </>
                 ))}
                 <Button
                   color="primary"
