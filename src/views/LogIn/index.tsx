@@ -57,6 +57,7 @@ export function Login() {
                 type="submit"
                 disabled={isSubmitting}
                 aria-live="polite"
+                pending={isSubmitting}
               >
                 <span>Log In</span>
               </Button>
