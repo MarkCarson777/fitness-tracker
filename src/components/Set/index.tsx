@@ -13,7 +13,7 @@ export function Set(props: SetProps) {
   const { setIndex, exerciseIndex, errors, className } = props;
 
   return (
-    <div className={clsx("flex flex-col", className)}>
+    <div className={clsx("flex flex-col max-w-24 gap-0.5", className)}>
       <FormInput
         type="number"
         placeholder="Weight"

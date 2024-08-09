@@ -25,7 +25,7 @@ export function Exercise(props: ExerciseProps) {
   const { exercise, exerciseIndex, errors, className } = props;
 
   return (
-    <div className={clsx("flex", className)}>
+    <div className={clsx("flex gap-0.5", className)}>
       <FormInput
         type="text"
         name={`exercises[${exerciseIndex}].exerciseName`}
@@ -35,30 +35,42 @@ export function Exercise(props: ExerciseProps) {
         }
       />
       <FieldArray name={`exercises[${exerciseIndex}].sets`}>
-        {({ push }) => (
-          <div className="flex">
+        {({ push, remove }) => (
+          <div className="flex gap-0.5">
             {exercise.sets.map((set, setIndex) => (
-              <Set
-                key={setIndex}
-                exerciseIndex={exerciseIndex}
-                setIndex={setIndex}
-                errors={errors}
-              />
+              <>
+                <Set
+                  key={setIndex}
+                  exerciseIndex={exerciseIndex}
+                  setIndex={setIndex}
+                  errors={errors}
+                />
+                <Button
+                  color="secondary"
+                  type="button"
+                  onClick={() => remove(setIndex)}
+                >
+                  <span>Remove</span>
+                </Button>
+              </>
             ))}
-            <Button
-              type="button"
-              onClick={() => {
-                const newSet = {
-                  id: uuidv4(),
-                  weight: "",
-                  reps: "",
-                };
+            {exercise.sets.length < 8 && (
+              <Button
+                color="primary"
+                type="button"
+                onClick={() => {
+                  const newSet = {
+                    id: uuidv4(),
+                    weight: "",
+                    reps: "",
+                  };
 
-                push(newSet);
-              }}
-            >
-              <span>Add set</span>
-            </Button>
+                  push(newSet);
+                }}
+              >
+                <span>Add set</span>
+              </Button>
+            )}
           </div>
         )}
       </FieldArray>

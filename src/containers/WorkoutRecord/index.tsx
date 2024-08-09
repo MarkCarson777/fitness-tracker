@@ -71,7 +71,7 @@ export function WorkoutRecord() {
       {({ isSubmitting, values, errors }) => (
         <Form className="flex flex-col">
           <div className="flex">
-            <div className="flex flex-col">
+            <div className="flex flex-col flex-1">
               <FormInput type="date" name="date" error={errors.date} />
               <FormInput
                 type="text"
@@ -101,6 +101,7 @@ export function WorkoutRecord() {
                   />
                 ))}
                 <Button
+                  color="primary"
                   type="button"
                   onClick={() => {
                     const newExercise = {
@@ -117,7 +118,7 @@ export function WorkoutRecord() {
               </div>
             )}
           </FieldArray>
-          <Button type="submit" disabled={isSubmitting}>
+          <Button color="primary" type="submit" disabled={isSubmitting}>
             <span>Save</span>
           </Button>
         </Form>
