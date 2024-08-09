@@ -16,22 +16,27 @@ type FormInputProps = {
 };
 
 export function FormInput(props: FormInputProps) {
-  const { name, type, label, placeholder, error, autoComplete, className } =
-    props;
-  const [displayError, setDisplayError] = useState(false);
+  const {
+    name,
+    type,
+    label,
+    placeholder,
+    error,
+    autoComplete,
+    min,
+    className,
+  } = props;
 
   return (
     <>
-      <div className="flex gap-1">
-        {label && (
-          <label className="text-xs" htmlFor={type}>
-            {label}
-          </label>
-        )}
-        {displayError && <FormError name={type} component="div" />}
-      </div>
-      <div className="relative">
+      {label && (
+        <label className="text-xs" htmlFor={type}>
+          {label}
+        </label>
+      )}
+      <div>
         <Field
+          min={min}
           name={name}
           type={type}
           placeholder={placeholder}
@@ -42,15 +47,6 @@ export function FormInput(props: FormInputProps) {
             className
           )}
         />
-        {error && (
-          <div
-            onMouseLeave={() => setDisplayError(false)}
-            onMouseEnter={() => setDisplayError(true)}
-            className="absolute flex justify-center items-center rounded-full h-[16px] w-[16px] bg-[#cb3e20] top-0 right-0 translate-x-1/2 -translate-y-1/2 "
-          >
-            <span className="text-xs font-semibold">!</span>
-          </div>
-        )}
       </div>
     </>
   );

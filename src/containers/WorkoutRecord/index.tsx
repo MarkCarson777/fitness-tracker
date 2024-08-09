@@ -9,36 +9,29 @@ import { Button } from "../../components/Button";
 import { Exercise } from "../../components/Exercise";
 import { FormInput } from "../../components/FormInput";
 
-const validationSchema = Yup.object().shape({
-  date: Yup.date().required("Date is required"),
-  workoutName: Yup.string().required("Workout Name is required"),
-  startTime: Yup.string().required("Start Time is required"),
-  endTime: Yup.string()
-    .required("End Time is required")
-    .test(
-      "is-greater",
-      "End Time must be later than Start Time",
-      function (value) {
-        const { startTime } = this.parent;
-        return !startTime || !value || value > startTime;
-      }
-    ),
+const WorkoutSchema = Yup.object().shape({
+  date: Yup.date().required("A date is required"),
+  workoutName: Yup.string().required("A workout name is required"),
+  startTime: Yup.string(),
+  endTime: Yup.string().test(
+    "is-greater",
+    "End time must be later than start time",
+    function (value) {
+      const { startTime } = this.parent;
+      return !startTime || !value || value > startTime;
+    }
+  ),
   exercises: Yup.array()
     .of(
       Yup.object().shape({
         id: Yup.string().required(),
-        exerciseName: Yup.string().required("Exercise Name is required"),
+        exerciseName: Yup.string().required("An exercise name is required"),
         sets: Yup.array()
           .of(
             Yup.object().shape({
               id: Yup.string().required(),
-              weight: Yup.number()
-                .required("Weight is required")
-                .positive("Weight must be a positive number"),
-              reps: Yup.number()
-                .required("Reps are required")
-                .positive("Reps must be a positive number")
-                .integer("Reps must be an integer"),
+              weight: Yup.number().required("A weight is required"),
+              reps: Yup.number().required("Reps are required"),
             })
           )
           .min(1, "At least one set is required"),
@@ -70,24 +63,30 @@ export function WorkoutRecord() {
           await createWorkout(values);
           console.log("Workout created successfully");
         } catch (error) {
-          console.log(error);
+          console.error("Error creating workout", error);
         }
       }}
+      validationSchema={WorkoutSchema}
     >
-      {({ isSubmitting, values }) => (
+      {({ isSubmitting, values, errors }) => (
         <Form className="flex flex-col">
           <div className="flex">
             <div className="flex flex-col">
-              <FormInput type="date" name="date" />
+              <FormInput type="date" name="date" error={errors.date} />
               <FormInput
                 type="text"
                 name="workoutName"
                 placeholder="Workout Name"
+                error={errors.workoutName}
               />
             </div>
             <div className="flex flex-col">
-              <FormInput type="time" name="startTime" />
-              <FormInput type="time" name="endTime" />
+              <FormInput
+                type="time"
+                name="startTime"
+                error={errors.startTime}
+              />
+              <FormInput type="time" name="endTime" error={errors.endTime} />
             </div>
           </div>
           <FieldArray name="exercises">
@@ -98,6 +97,7 @@ export function WorkoutRecord() {
                     key={index}
                     exercise={exercise}
                     exerciseIndex={index}
+                    errors={errors}
                   />
                 ))}
                 <Button

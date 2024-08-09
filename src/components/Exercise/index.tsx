@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { v4 as uuidv4 } from "uuid";
 import { FieldArray } from "formik";
 
@@ -16,17 +17,22 @@ type ExerciseProps = {
     }[];
   };
   exerciseIndex: number;
+  errors: any;
+  className?: string;
 };
 
 export function Exercise(props: ExerciseProps) {
-  const { exercise, exerciseIndex } = props;
+  const { exercise, exerciseIndex, errors, className } = props;
 
   return (
-    <div className="flex">
+    <div className={clsx("flex", className)}>
       <FormInput
         type="text"
         name={`exercises[${exerciseIndex}].exerciseName`}
         placeholder="Exercise"
+        error={
+          errors.exercises && errors.exercises[exerciseIndex]?.exerciseName
+        }
       />
       <FieldArray name={`exercises[${exerciseIndex}].sets`}>
         {({ push }) => (
@@ -36,6 +42,7 @@ export function Exercise(props: ExerciseProps) {
                 key={setIndex}
                 exerciseIndex={exerciseIndex}
                 setIndex={setIndex}
+                errors={errors}
               />
             ))}
             <Button
