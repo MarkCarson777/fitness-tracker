@@ -1,3 +1,5 @@
+import { createContext, useState, useEffect } from "react";
+
 import { User } from "firebase/auth";
 import {
   googleSignIn as googleSignInService,
@@ -6,7 +8,6 @@ import {
   signUpUser as signUpUserService,
   userStateListener,
 } from "../../firebase/authService";
-import { createContext, useState, useEffect } from "react";
 
 type AuthProviderProps = {
   children?: ReactNode;
@@ -31,8 +32,7 @@ export const AuthContext = createContext<AuthContextType>({
 });
 
 const getStoredUser = () => {
-  const storedUser = localStorage.getItem("currentUser");
-  return storedUser ? JSON.parse(storedUser) : null;
+  return localStorage.getItem("currentUser") ? JSON.parse(storedUser) : null;
 };
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
