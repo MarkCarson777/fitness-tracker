@@ -4,7 +4,6 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
 import { AuthContext } from "../../contexts/AuthContext";
-
 import { Button } from "../../components/Button";
 import { FormInput } from "../../components/FormInput";
 import { Icon } from "../../components/Icon";
@@ -33,30 +32,26 @@ export function Login() {
         {({ isSubmitting, errors }) => (
           <>
             <Form className="flex flex-col w-fit gap-2">
-              <div className="flex flex-col gap-1">
-                <FormInput
-                  type="email"
-                  name="email"
-                  label="Email"
-                  autoComplete="email"
-                  placeholder="Enter your email address..."
-                  className="min-w-[320px] rounded-sm text-[#000]"
-                  aria-label="Email"
-                  error={errors.email}
-                />
-              </div>
-              <div className="flex flex-col gap-1">
-                <FormInput
-                  type="password"
-                  name="password"
-                  label="Password"
-                  autoComplete="current-password"
-                  placeholder="Enter your password..."
-                  className="min-w-[320px] rounded-sm text-[#000]"
-                  aria-label="Password"
-                  error={errors.password}
-                />
-              </div>
+              <FormInput
+                type="email"
+                name="email"
+                label="Email"
+                autoComplete="email"
+                placeholder="Enter your email address..."
+                className="min-w-[320px] rounded-sm text-[#000]"
+                aria-label="Email"
+                error={errors.email}
+              />
+              <FormInput
+                type="password"
+                name="password"
+                label="Password"
+                autoComplete="current-password"
+                placeholder="Enter your password..."
+                className="min-w-[320px] rounded-sm text-[#000]"
+                aria-label="Password"
+                error={errors.password}
+              />
               <Button
                 className="h-[48px] bg-[#3a76eb] font-semibold mt-4"
                 type="submit"
