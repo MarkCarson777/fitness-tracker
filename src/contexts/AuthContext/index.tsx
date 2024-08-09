@@ -32,7 +32,8 @@ export const AuthContext = createContext<AuthContextType>({
 });
 
 const getStoredUser = () => {
-  return localStorage.getItem("currentUser") ? JSON.parse(storedUser) : null;
+  const storedUser = localStorage.getItem("currentUser");
+  return storedUser ? JSON.parse(storedUser) : null;
 };
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
