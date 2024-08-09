@@ -14,8 +14,9 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-auth.useDeviceLanguage();
 const provider = new GoogleAuthProvider();
 const firestore = getFirestore(app);
+
+auth.useDeviceLanguage();
 
 export { app, auth, provider, firestore };
