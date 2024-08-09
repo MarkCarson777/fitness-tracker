@@ -33,7 +33,9 @@ export function FormInput(props: FormInputProps) {
             autoComplete={autoComplete}
             className={clsx(
               "pl-3 h-12",
-              meta.touched && meta.error && "ring-[3px] ring-[#cb3e20]",
+              meta.touched &&
+                meta.error &&
+                "ring-[3px] ring-[#cb3e20] ring-inset",
               className
             )}
             {...field}

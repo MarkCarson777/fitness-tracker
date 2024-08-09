@@ -5,14 +5,16 @@ import { Loader } from "../Loader";
 type ButtonProps = {
   children: React.ReactNode;
   type: "button" | "submit" | "reset";
-  pending;
-  disabled: boolean;
+  primary?: boolean;
+  pending?: boolean;
+  disabled?: boolean;
   onClick?: () => void;
   className?: string;
 };
 
 export function Button(props: ButtonProps) {
-  const { children, type, pending, disabled, onClick, className } = props;
+  const { children, type, primary, pending, disabled, onClick, className } =
+    props;
 
   return (
     <button
@@ -20,7 +22,8 @@ export function Button(props: ButtonProps) {
       onClick={onClick}
       disabled={disabled}
       className={clsx(
-        "relative flex justify-center items-center rounded-md text-white",
+        "flex font-semibold h-12 justify-center items-center rounded-md text-white",
+        primary && "bg-primary-500",
         className
       )}
     >

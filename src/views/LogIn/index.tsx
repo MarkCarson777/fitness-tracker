@@ -49,7 +49,7 @@ export function Login() {
                 aria-label="Password"
               />
               <Button
-                className="h-12 bg-primary-500 font-semibold border-[1px] border-primary-300"
+                primary
                 type="submit"
                 disabled={isSubmitting}
                 aria-live="polite"
