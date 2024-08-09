@@ -1,4 +1,5 @@
 import { createContext } from "react";
+
 import { addDoc, collection } from "@firebase/firestore";
 import { firestore } from "../../firebase/config.tsx";
 
@@ -7,7 +8,21 @@ type WorkoutProviderProps = {
 };
 
 type WorkoutContextType = {
-  createWorkout: (workout: any) => void;
+  createWorkout: (workout: {
+    date: string;
+    workoutName: string;
+    startTime: string;
+    endTime: string;
+    exercises: {
+      id: string;
+      exerciseName: string;
+      sets: {
+        id: string;
+        weight: string;
+        reps: string;
+      }[];
+    }[];
+  }) => void;
 };
 
 export const WorkoutContext = createContext<WorkoutContextType>({
