@@ -9,23 +9,14 @@ type FormInputProps = {
   name: string;
   type: string;
   label?: string;
-  error?: string;
   placeholder?: string;
   autoComplete?: string;
   className?: string;
 };
 
 export function FormInput(props: FormInputProps) {
-  const {
-    name,
-    type,
-    label,
-    placeholder,
-    error,
-    autoComplete,
-    min,
-    className,
-  } = props;
+  const { name, type, label, placeholder, autoComplete, min, className } =
+    props;
 
   return (
     <>
@@ -34,20 +25,21 @@ export function FormInput(props: FormInputProps) {
           {label}
         </label>
       )}
-      <div>
-        <Field
-          min={min}
-          name={name}
-          type={type}
-          placeholder={placeholder}
-          autoComplete={autoComplete}
-          className={clsx(
-            "pl-3 h-12",
-            error && "ring-2 ring-[#cb3e20]",
-            className
-          )}
-        />
-      </div>
+      <Field name={name}>
+        {({ field, meta }) => (
+          <input
+            type={type}
+            placeholder={placeholder}
+            autoComplete={autoComplete}
+            className={clsx(
+              "pl-3 h-12",
+              meta.touched && meta.error && "ring-[3px] ring-[#cb3e20]",
+              className
+            )}
+            {...field}
+          />
+        )}
+      </Field>
     </>
   );
 }

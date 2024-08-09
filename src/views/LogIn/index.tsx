@@ -29,7 +29,7 @@ export function Login() {
           navigate("/workout");
         }}
       >
-        {({ isSubmitting, errors }) => (
+        {({ isSubmitting, errors, touched }) => (
           <>
             <Form className="flex flex-col w-fit gap-2">
               <FormInput
@@ -40,7 +40,6 @@ export function Login() {
                 placeholder="Enter your email address..."
                 className="min-w-80 rounded-sm text-black"
                 aria-label="Email"
-                error={errors.email}
               />
               <FormInput
                 type="password"
@@ -50,7 +49,6 @@ export function Login() {
                 placeholder="Enter your password..."
                 className="min-w-80 rounded-sm text-black"
                 aria-label="Password"
-                error={errors.password}
               />
               <Button
                 className="h-12 bg-primary-500 font-semibold mt-4"
