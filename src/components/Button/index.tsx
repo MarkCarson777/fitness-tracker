@@ -5,7 +5,7 @@ import { Loader } from "../Loader";
 type ButtonProps = {
   children: React.ReactNode;
   type: "button" | "submit" | "reset";
-  primary?: boolean;
+  color: "primary" | "danger";
   pending?: boolean;
   disabled?: boolean;
   onClick?: () => void;
@@ -13,7 +13,7 @@ type ButtonProps = {
 };
 
 export function Button(props: ButtonProps) {
-  const { children, type, primary, pending, disabled, onClick, className } =
+  const { children, type, color, pending, disabled, onClick, className } =
     props;
 
   return (
@@ -23,7 +23,8 @@ export function Button(props: ButtonProps) {
       disabled={disabled}
       className={clsx(
         "relative flex font-semibold h-12 justify-center items-center rounded-md text-white",
-        primary && "bg-primary-500",
+        color === "primary" && "bg-primary-500",
+        color === "danger" && "bg-danger-500",
         className
       )}
     >

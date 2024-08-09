@@ -65,8 +65,8 @@ export function SignUp() {
                 aria-label="confirm-password"
               />
               <Button
-                primary
                 type="submit"
+                color="primary"
                 disabled={isSubmitting}
                 aria-live="polite"
                 pending={isSubmitting}

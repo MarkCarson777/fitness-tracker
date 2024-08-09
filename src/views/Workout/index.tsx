@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../../contexts/AuthContext";
 
+import { Button } from "../../components/Button";
 import { SignOutButton } from "../../components/SignOutButton";
 import { WorkoutRecord } from "../../containers/WorkoutRecord";
 
@@ -11,17 +12,17 @@ export function Workout() {
   const navigate = useNavigate();
 
   return (
-    <div className="w-full">
+    <div className="flex flex-col h-screen w-full justify-center items-center bg-black-500">
       <div className="w-full flex justify-end">
-        <button
-          className="border-2 border-danger-500"
+        <Button
+          color="danger"
           onClick={async () => {
             await signOutUser();
             navigate("/");
           }}
         >
           Sign Out
-        </button>
+        </Button>
       </div>
       <WorkoutRecord />
     </div>
