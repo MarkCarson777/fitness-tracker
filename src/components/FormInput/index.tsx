@@ -42,7 +42,7 @@ export function FormInput(props: FormInputProps) {
           placeholder={placeholder}
           autoComplete={autoComplete}
           className={clsx(
-            "pl-3 h-[48px]",
+            "pl-3 h-12",
             error && "ring-2 ring-[#cb3e20]",
             className
           )}

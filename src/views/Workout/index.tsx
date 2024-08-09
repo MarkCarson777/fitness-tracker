@@ -14,7 +14,7 @@ export function Workout() {
     <div className="w-full">
       <div className="w-full flex justify-end">
         <button
-          className="border-2 border-red-500"
+          className="border-2 border-danger-500"
           onClick={async () => {
             await signOutUser();
             navigate("/");
