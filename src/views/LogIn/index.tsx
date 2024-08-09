@@ -20,7 +20,7 @@ export function Login() {
   const navigate = useNavigate();
 
   return (
-    <div className="relative flex flex-col h-screen w-full justify-center items-center gap-2 bg-[#16171a] text-[#ffffff]">
+    <div className="relative gap-4 flex flex-col h-screen w-full justify-center items-center bg-black-500">
       <Formik
         initialValues={{ email: "", password: "" }}
         validationSchema={SignInSchema}
@@ -31,11 +31,10 @@ export function Login() {
       >
         {({ isSubmitting, errors, touched }) => (
           <>
-            <Form className="flex flex-col w-fit gap-2">
+            <Form className="flex flex-col w-fit gap-4">
               <FormInput
                 type="email"
                 name="email"
-                label="Email"
                 autoComplete="email"
                 placeholder="Enter your email address..."
                 className="min-w-80 rounded-sm text-black"
@@ -44,14 +43,13 @@ export function Login() {
               <FormInput
                 type="password"
                 name="password"
-                label="Password"
                 autoComplete="current-password"
                 placeholder="Enter your password..."
                 className="min-w-80 rounded-sm text-black"
                 aria-label="Password"
               />
               <Button
-                className="h-12 bg-primary-500 font-semibold mt-4"
+                className="h-12 bg-primary-500 font-semibold border-[1px] border-primary-300"
                 type="submit"
                 disabled={isSubmitting}
                 aria-live="polite"
@@ -60,32 +58,36 @@ export function Login() {
                 <span>Log In</span>
               </Button>
             </Form>
-            <button
-              aria-label="Sign in with Google"
-              className="flex gap-2 bg-white text-black font-semibold h-12 justify-center items-center rounded-full px-2.5 mt-1"
-              onClick={async () => {
-                await googleSignIn();
-                navigate("/workout");
-              }}
-            >
-              <Icon icon="Google" size={24} />
-              <span className="pb-0.5">Sign in with Google</span>
-            </button>
-            <div className="flex gap-1 text-xs mt-1">
-              <span>Don't have an account?</span>
-              <Link
-                className="text-primary-500 underline hover:no-underline"
-                to="/signup"
-                aria-label="Sign up for an account"
+            <div className="flex flex-col gap-2.5 items-center">
+              <button
+                aria-label="Sign in with Google"
+                className="flex gap-2 bg-white text-black font-semibold h-12 justify-center items-center rounded-full px-3.5"
+                onClick={async () => {
+                  await googleSignIn();
+                  navigate("/workout");
+                }}
               >
-                Sign Up
-              </Link>
+                <Icon icon="Google" size={24} />
+                <span className="pb-0.5 text-gray-500">
+                  Sign in with Google
+                </span>
+              </button>
+              <div className="flex gap-1 text-xs">
+                <span className="text-white">Don't have an account?</span>
+                <Link
+                  className="text-primary-500 underline hover:no-underline"
+                  to="/signup"
+                  aria-label="Sign up for an account"
+                >
+                  Sign Up
+                </Link>
+              </div>
             </div>
           </>
         )}
       </Formik>
       <div
-        className="absolute left-8 bottom-8 flex flex-col text-9xl"
+        className="absolute left-8 bottom-8 flex flex-col text-9xl text-white"
         aria-label="Fit Tracker"
       >
         <span>Fit</span>
