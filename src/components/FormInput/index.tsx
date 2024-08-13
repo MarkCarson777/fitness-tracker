@@ -1,6 +1,6 @@
 import clsx from "clsx";
 
-import { Field } from "formik";
+import { Field, FieldProps } from "formik";
 
 type FormInputProps = {
   name: string;

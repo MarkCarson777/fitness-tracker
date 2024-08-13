@@ -11,7 +11,7 @@ type ExerciseProps = {
     id: string;
     exerciseName: string;
     sets: {
-      id: number;
+      id: string;
       weight: string;
       reps: string;
     }[];
@@ -30,14 +30,11 @@ export function Exercise(props: ExerciseProps) {
         type="text"
         name={`exercises[${exerciseIndex}].exerciseName`}
         placeholder="Exercise"
-        error={
-          errors.exercises && errors.exercises[exerciseIndex]?.exerciseName
-        }
       />
       <FieldArray name={`exercises[${exerciseIndex}].sets`}>
         {({ push, remove }) => (
           <div className="flex gap-0.5">
-            {exercise.sets.map((set, setIndex) => (
+            {exercise.sets.map((_, setIndex) => (
               <>
                 <Set
                   key={setIndex}
@@ -46,7 +43,7 @@ export function Exercise(props: ExerciseProps) {
                   errors={errors}
                 />
                 <Button
-                  color="secondary"
+                  color="primary"
                   type="button"
                   onClick={() => remove(setIndex)}
                 >

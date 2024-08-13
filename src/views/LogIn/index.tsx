@@ -29,7 +29,7 @@ export function Login() {
           navigate("/workout");
         }}
       >
-        {({ isSubmitting, errors, touched }) => (
+        {({ isSubmitting }) => (
           <>
             <Form className="flex flex-col w-fit gap-4">
               <FormInput

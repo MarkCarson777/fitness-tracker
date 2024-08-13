@@ -19,11 +19,7 @@ type Workout = {
   exercises: {
     id: string;
     exerciseName: string;
-    sets: {
-      id: string;
-      weight: string;
-      reps: string;
-    }[];
+    sets: { id: string; weight: string; reps: string }[];
   }[];
 };
 
