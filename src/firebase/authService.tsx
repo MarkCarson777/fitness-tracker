@@ -4,6 +4,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  User,
 } from "firebase/auth";
 import { auth, provider } from "./config";
 

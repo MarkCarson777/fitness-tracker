@@ -10,7 +10,7 @@ import {
 } from "../../firebase/authService";
 
 type AuthProviderProps = {
-  children?: ReactNode;
+  children?: React.ReactNode;
 };
 
 type AuthContextType = {
@@ -25,10 +25,10 @@ type AuthContextType = {
 export const AuthContext = createContext<AuthContextType>({
   currentUser: {} as User | null,
   googleSignIn: () => {},
-  setCurrentUser: (user: User) => {},
-  signInUser: (email: string, password: string) => {},
+  setCurrentUser: () => {},
+  signInUser: () => {},
   signOutUser: () => {},
-  signUpUser: (email: string, password: string) => {},
+  signUpUser: () => {},
 });
 
 const getStoredUser = () => {

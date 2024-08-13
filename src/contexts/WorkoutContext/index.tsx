@@ -4,25 +4,27 @@ import { addDoc, collection } from "@firebase/firestore";
 import { firestore } from "../../firebase/config.tsx";
 
 type WorkoutProviderProps = {
-  children?: ReactNode;
+  children?: React.ReactNode;
 };
 
 type WorkoutContextType = {
-  createWorkout: (workout: {
-    date: string;
-    workoutName: string;
-    startTime: string;
-    endTime: string;
-    exercises: {
+  createWorkout: (workout: Workout) => void;
+};
+
+type Workout = {
+  date: string;
+  workoutName: string;
+  startTime: string;
+  endTime: string;
+  exercises: {
+    id: string;
+    exerciseName: string;
+    sets: {
       id: string;
-      exerciseName: string;
-      sets: {
-        id: string;
-        weight: string;
-        reps: string;
-      }[];
+      weight: string;
+      reps: string;
     }[];
-  }) => void;
+  }[];
 };
 
 export const WorkoutContext = createContext<WorkoutContextType>({
@@ -30,7 +32,7 @@ export const WorkoutContext = createContext<WorkoutContextType>({
 });
 
 export const WorkoutProvider = ({ children }: WorkoutProviderProps) => {
-  const createWorkout = (workout) => {
+  const createWorkout = (workout: Workout) => {
     const ref = collection(firestore, "workouts");
 
     try {

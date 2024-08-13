@@ -72,21 +72,16 @@ export function WorkoutRecord() {
         <Form className="flex flex-col">
           <div className="flex">
             <div className="flex flex-col flex-1">
-              <FormInput type="date" name="date" error={errors.date} />
+              <FormInput type="date" name="date" />
               <FormInput
                 type="text"
                 name="workoutName"
                 placeholder="Workout Name"
-                error={errors.workoutName}
               />
             </div>
             <div className="flex flex-col">
-              <FormInput
-                type="time"
-                name="startTime"
-                error={errors.startTime}
-              />
-              <FormInput type="time" name="endTime" error={errors.endTime} />
+              <FormInput type="time" name="startTime" />
+              <FormInput type="time" name="endTime" />
             </div>
           </div>
           <FieldArray name="exercises">
@@ -101,7 +96,7 @@ export function WorkoutRecord() {
                       errors={errors}
                     />
                     <Button
-                      color="secondary"
+                      color="primary"
                       type="button"
                       onClick={() => remove(index)}
                     >

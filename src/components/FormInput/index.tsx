@@ -1,9 +1,6 @@
-import { useState } from "react";
 import clsx from "clsx";
 
 import { Field } from "formik";
-
-import { FormError } from "../FormError";
 
 type FormInputProps = {
   name: string;
@@ -15,8 +12,7 @@ type FormInputProps = {
 };
 
 export function FormInput(props: FormInputProps) {
-  const { name, type, label, placeholder, autoComplete, min, className } =
-    props;
+  const { name, type, label, placeholder, autoComplete, className } = props;
 
   return (
     <>
@@ -26,7 +22,7 @@ export function FormInput(props: FormInputProps) {
         </label>
       )}
       <Field name={name}>
-        {({ field, meta }) => (
+        {({ field, meta }: FieldProps) => (
           <input
             type={type}
             placeholder={placeholder}
