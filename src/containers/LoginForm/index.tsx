@@ -1,5 +1,7 @@
 // React
 import { useContext } from "react";
+// Third party
+import clsx from "clsx";
 // Routing
 import { useNavigate } from "react-router-dom";
 // Forms and validation
@@ -11,6 +13,10 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { Button } from "../../components/Button";
 import { FormInput } from "../../components/FormInput";
 
+type LoginFormProps = {
+  className?: string;
+};
+
 const SignInSchema = Yup.object().shape({
   email: Yup.string()
     .email("Please enter a valid email address")
@@ -18,7 +24,8 @@ const SignInSchema = Yup.object().shape({
   password: Yup.string().required("A password is required"),
 });
 
-export function LoginForm() {
+export function LoginForm(props: LoginFormProps) {
+  const { className } = props;
   const { signInUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -32,7 +39,7 @@ export function LoginForm() {
       }}
     >
       {({ isSubmitting }) => (
-        <Form className="flex flex-col space-y-2">
+        <Form className={clsx("flex flex-col space-y-2", className)}>
           <FormInput
             type="email"
             name="email"
