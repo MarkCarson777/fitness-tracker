@@ -5,7 +5,7 @@ import { SignupForm } from "../../containers/SignupForm";
 
 export function Signup() {
   return (
-    <main className="relative flex flex-col h-screen w-full justify-center items-center bg-black-500">
+    <main className="container relative flex flex-col h-screen justify-center items-center bg-black-500">
       <header className="sr-only">
         <h1>Sign up to Fit Tracker</h1>
       </header>
@@ -29,10 +29,10 @@ export function Signup() {
         </p>
       </section>
       <footer
-        className="absolute left-8 bottom-8 flex flex-col text-6xl md:text-8xl lg:text-9xl text-white"
+        className="absolute left-8 bottom-8 text-6xl md:text-8xl lg:text-9xl text-white"
         aria-label="Fit Tracker"
       >
-        <span>Sign Up.</span>
+        <span>Sign up.</span>
       </footer>
     </main>
   );
