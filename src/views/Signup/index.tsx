@@ -5,7 +5,7 @@ import { SignupForm } from "../../containers/SignupForm";
 
 export function Signup() {
   return (
-    <main className="container relative flex flex-col h-screen justify-center items-center bg-black-500">
+    <main className="relative flex flex-col h-screen w-full justify-center items-center bg-black-500">
       <header className="sr-only">
         <h1>Sign up to Fit Tracker</h1>
       </header>

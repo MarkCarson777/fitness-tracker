@@ -3,6 +3,7 @@ import { createContext, useState, useEffect } from "react";
 import { User } from "firebase/auth";
 import {
   googleSignIn as googleSignInService,
+  recoverPassword as recoverPasswordService,
   signInUser as signInUserService,
   signOutUser as signOutUserService,
   signUpUser as signUpUserService,
@@ -16,6 +17,7 @@ type AuthProviderProps = {
 type AuthContextType = {
   currentUser: User | null;
   googleSignIn: () => void;
+  recoverPassword: (email: string) => void;
   setCurrentUser: (user: User | null) => void;
   signInUser: (email: string, password: string) => void;
   signOutUser: () => void;
@@ -25,6 +27,7 @@ type AuthContextType = {
 export const AuthContext = createContext<AuthContextType>({
   currentUser: {} as User | null,
   googleSignIn: () => {},
+  recoverPassword: () => {},
   setCurrentUser: () => {},
   signInUser: () => {},
   signOutUser: () => {},
@@ -61,6 +64,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
+  const recoverPassword = async (email: string) => {
+    try {
+      await recoverPasswordService(email);
+    } catch (error) {
+      console.error("Error recovering password:", error);
+    }
+  };
+
   const signInUser = async (email: string, password: string) => {
     try {
       await signInUserService(email, password);
@@ -90,6 +101,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       value={{
         currentUser,
         googleSignIn,
+        recoverPassword,
         setCurrentUser,
         signInUser,
         signOutUser,

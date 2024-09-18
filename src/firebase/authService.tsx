@@ -1,5 +1,6 @@
 import {
   createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
   signInWithPopup,
   signInWithEmailAndPassword,
   signOut,
@@ -14,6 +15,15 @@ export const googleSignIn = async () => {
     console.log("Successfully signed in with Google");
   } catch (error) {
     console.error("Error signing in with Google:", error);
+  }
+};
+
+export const recoverPassword = async (email: string) => {
+  try {
+    await sendPasswordResetEmail(auth, email);
+    console.log("Successfully sent password recovery email");
+  } catch (error) {
+    console.error("Error recovering password:", error);
   }
 };
 
