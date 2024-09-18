@@ -3,7 +3,7 @@ import { useEffect, useContext } from "react";
 import { AuthContext } from "./contexts/AuthContext";
 
 import { Login } from "./views/Login";
-import { SignUp } from "./views/SignUp";
+import { Signup } from "./views/Signup";
 import { Workout } from "./views/Workout";
 
 export function App() {
@@ -19,7 +19,7 @@ export function App() {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
-      <Route path="/signup" element={<SignUp />} />
+      <Route path="/signup" element={<Signup />} />
       <Route path="/workout" element={currentUser ? <Workout /> : <Login />} />
     </Routes>
   );

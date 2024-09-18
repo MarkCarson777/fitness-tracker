@@ -1,22 +1,16 @@
+// React
 import { useContext } from "react";
+// Routing
 import { Link, useNavigate } from "react-router-dom";
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
-
+// Contexts
 import { AuthContext } from "../../contexts/AuthContext";
-import { Button } from "../../components/Button";
-import { FormInput } from "../../components/FormInput";
-import { Icon } from "../../components/Icon";
-
-const SignInSchema = Yup.object().shape({
-  email: Yup.string()
-    .email("Please enter a valid email address")
-    .required("An email address is required"),
-  password: Yup.string().required("A password is required"),
-});
+// Components
+import { GoogleSignIn } from "../../components/GoogleSignIn";
+// Containers
+import { LoginForm } from "../../containers/LoginForm";
 
 export function Login() {
-  const { googleSignIn, signInUser } = useContext(AuthContext);
+  const { googleSignIn } = useContext(AuthContext);
   const navigate = useNavigate();
 
   return (
@@ -31,56 +25,14 @@ export function Login() {
         <h2 id="login-section" className="sr-only">
           Sign In to Your Account
         </h2>
-        <Formik
-          initialValues={{ email: "", password: "" }}
-          validationSchema={SignInSchema}
-          onSubmit={async (values) => {
-            await signInUser(values.email, values.password);
-            navigate("/workout");
-          }}
-        >
-          {({ isSubmitting }) => (
-            <Form className="flex flex-col space-y-2">
-              <FormInput
-                type="email"
-                name="email"
-                autoComplete="email"
-                placeholder="Email"
-                className="rounded-sm"
-                aria-label="Email"
-              />
-              <FormInput
-                type="password"
-                name="password"
-                autoComplete="current-password"
-                placeholder="Password"
-                className="rounded-sm"
-                aria-label="Password"
-              />
-              <Button
-                type="submit"
-                color="primary"
-                disabled={isSubmitting}
-                aria-live="polite"
-                pending={isSubmitting}
-              >
-                <span>Log In</span>
-              </Button>
-            </Form>
-          )}
-        </Formik>
-        <div className="space-y-1.5 w-full flex flex-col items-center">
-          <button
-            aria-label="Sign in with Google"
-            className="flex space-x-2 bg-white font-semibold py-3 rounded-full px-3.5"
+        <LoginForm />
+        <div className="space-y-2 w-full flex flex-col items-center">
+          <GoogleSignIn
             onClick={async () => {
               await googleSignIn();
               navigate("/workout");
             }}
-          >
-            <Icon icon="Google" size={24} />
-            <span className=" text-gray-500">Sign in with Google</span>
-          </button>
+          />
           <p className="space-x-1 text-xs">
             <span className="text-white">Don't have an account?</span>
             <Link
