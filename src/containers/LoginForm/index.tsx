@@ -3,7 +3,7 @@ import { useContext } from "react";
 // Third party
 import clsx from "clsx";
 // Routing
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // Forms and validation
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
@@ -48,14 +48,25 @@ export function LoginForm(props: LoginFormProps) {
             className="rounded-sm"
             aria-label="Email"
           />
-          <FormInput
-            type="password"
-            name="password"
-            autoComplete="current-password"
-            placeholder="Password"
-            className="rounded-sm"
-            aria-label="Password"
-          />
+          <div className="flex flex-col space-y-2">
+            <FormInput
+              type="password"
+              name="password"
+              autoComplete="current-password"
+              placeholder="Password"
+              className="rounded-sm"
+              aria-label="Password"
+            />
+            <p className="space-x-1 text-xs">
+              <Link
+                className="text-primary-500 underline hover:no-underline"
+                to="/password-recovery"
+                aria-label="Sign up for an account"
+              >
+                Forgot your password?
+              </Link>
+            </p>
+          </div>
           <Button
             type="submit"
             color="primary"

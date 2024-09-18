@@ -14,7 +14,7 @@ export function Login() {
   const navigate = useNavigate();
 
   return (
-    <main className="container relative flex flex-col h-screen justify-center items-center bg-black-500">
+    <main className="relative flex flex-col h-screen w-full justify-center items-center bg-black-500">
       <header className="sr-only">
         <h1>Login to Fit Tracker</h1>
       </header>
@@ -26,7 +26,7 @@ export function Login() {
           Sign in to your account
         </h2>
         <LoginForm />
-        <div className="space-y-2 flex flex-col items-center">
+        <div className="space-y-2 flex flex-col items-center pt-1">
           <GoogleSignIn
             onClick={async () => {
               await googleSignIn();
