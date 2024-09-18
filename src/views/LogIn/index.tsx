@@ -20,32 +20,41 @@ export function Login() {
   const navigate = useNavigate();
 
   return (
-    <div className="relative gap-4 flex flex-col h-screen w-full justify-center items-center bg-black-500">
-      <Formik
-        initialValues={{ email: "", password: "" }}
-        validationSchema={SignInSchema}
-        onSubmit={async (values) => {
-          await signInUser(values.email, values.password);
-          navigate("/workout");
-        }}
+    <main className="relative flex flex-col h-screen w-full justify-center items-center bg-black-500">
+      <header className="sr-only">
+        <h1>Login to Fit Tracker</h1>
+      </header>
+      <section
+        aria-labelledby="login-section"
+        className="max-w-56 md:max-w-72 lg:max-w-96 space-y-2 w-full"
       >
-        {({ isSubmitting }) => (
-          <>
-            <Form className="flex flex-col w-fit gap-4">
+        <h2 id="login-section" className="sr-only">
+          Sign In to Your Account
+        </h2>
+        <Formik
+          initialValues={{ email: "", password: "" }}
+          validationSchema={SignInSchema}
+          onSubmit={async (values) => {
+            await signInUser(values.email, values.password);
+            navigate("/workout");
+          }}
+        >
+          {({ isSubmitting }) => (
+            <Form className="flex flex-col space-y-2">
               <FormInput
                 type="email"
                 name="email"
                 autoComplete="email"
-                placeholder="Enter your email address..."
-                className="min-w-80 rounded-sm"
+                placeholder="Email"
+                className="rounded-sm"
                 aria-label="Email"
               />
               <FormInput
                 type="password"
                 name="password"
                 autoComplete="current-password"
-                placeholder="Enter your password..."
-                className="min-w-80 rounded-sm text-black"
+                placeholder="Password"
+                className="rounded-sm"
                 aria-label="Password"
               />
               <Button
@@ -58,41 +67,39 @@ export function Login() {
                 <span>Log In</span>
               </Button>
             </Form>
-            <div className="flex flex-col gap-2.5 items-center">
-              <button
-                aria-label="Sign in with Google"
-                className="flex gap-2 bg-white text-black font-semibold h-12 justify-center items-center rounded-full px-3.5"
-                onClick={async () => {
-                  await googleSignIn();
-                  navigate("/workout");
-                }}
-              >
-                <Icon icon="Google" size={24} />
-                <span className="pb-0.5 text-gray-500">
-                  Sign in with Google
-                </span>
-              </button>
-              <div className="flex gap-1 text-xs">
-                <span className="text-white">Don't have an account?</span>
-                <Link
-                  className="text-primary-500 underline hover:no-underline"
-                  to="/signup"
-                  aria-label="Sign up for an account"
-                >
-                  Sign Up
-                </Link>
-              </div>
-            </div>
-          </>
-        )}
-      </Formik>
-      <div
-        className="absolute left-8 bottom-8 flex flex-col text-9xl text-white"
+          )}
+        </Formik>
+        <div className="space-y-1.5 w-full flex flex-col items-center">
+          <button
+            aria-label="Sign in with Google"
+            className="flex space-x-2 bg-white font-semibold py-3 rounded-full px-3.5"
+            onClick={async () => {
+              await googleSignIn();
+              navigate("/workout");
+            }}
+          >
+            <Icon icon="Google" size={24} />
+            <span className=" text-gray-500">Sign in with Google</span>
+          </button>
+          <p className="space-x-1 text-xs">
+            <span className="text-white">Don't have an account?</span>
+            <Link
+              className="text-primary-500 underline hover:no-underline"
+              to="/signup"
+              aria-label="Sign up for an account"
+            >
+              Sign Up
+            </Link>
+          </p>
+        </div>
+      </section>
+      <footer
+        className="absolute left-8 bottom-8 flex flex-col text-6xl md:text-8xl lg:text-9xl text-white"
         aria-label="Fit Tracker"
       >
         <span>Fit</span>
         <span>Tracker.</span>
-      </div>
-    </div>
+      </footer>
+    </main>
   );
 }
