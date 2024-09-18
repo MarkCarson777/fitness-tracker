@@ -14,7 +14,7 @@ export function Signup() {
         className="max-w-56 md:max-w-72 lg:max-w-96 space-y-2 w-full"
       >
         <h2 id="signup-section" className="sr-only">
-          Sign up for an Account
+          Sign up for an account
         </h2>
         <SignupForm />
         <p className="space-x-1 text-xs flex justify-center">

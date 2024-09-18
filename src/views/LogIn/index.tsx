@@ -23,7 +23,7 @@ export function Login() {
         className="max-w-56 md:max-w-72 lg:max-w-96 space-y-2 w-full"
       >
         <h2 id="login-section" className="sr-only">
-          Sign In to Your Account
+          Sign in to your account
         </h2>
         <LoginForm />
         <div className="space-y-2 flex flex-col items-center">
@@ -40,7 +40,7 @@ export function Login() {
               to="/signup"
               aria-label="Sign up for an account"
             >
-              Sign Up
+              Sign up
             </Link>
           </p>
         </div>

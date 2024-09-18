@@ -63,7 +63,7 @@ export function LoginForm(props: LoginFormProps) {
             aria-live="polite"
             pending={isSubmitting}
           >
-            <span>Log In</span>
+            <span>Sign in</span>
           </Button>
         </Form>
       )}
