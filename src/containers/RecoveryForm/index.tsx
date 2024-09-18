@@ -1,9 +1,15 @@
+// React
+import { useContext } from "react";
+// Third party
 import clsx from "clsx";
+// Routing
+import { useNavigate } from "react-router-dom";
+// Forms and validation
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+// Contexts
 import { AuthContext } from "../../contexts/AuthContext";
+// Components
 import { Button } from "../../components/Button";
 import { FormInput } from "../../components/FormInput";
 
@@ -25,7 +31,6 @@ export function RecoveryForm(props: RecoveryFormProps) {
       initialValues={{ email: "" }}
       validationSchema={RecoverySchema}
       onSubmit={async (values) => {
-        console.log("values", values);
         await recoverPassword(values.email);
         console.log("Password recovery email sent");
         navigate("/");
@@ -48,7 +53,7 @@ export function RecoveryForm(props: RecoveryFormProps) {
             aria-live="polite"
             pending={isSubmitting}
           >
-            <span>Recover your password</span>
+            <span>Send</span>
           </Button>
         </Form>
       )}

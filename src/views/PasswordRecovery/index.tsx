@@ -14,7 +14,7 @@ export function PasswordRecovery() {
         className="max-w-56 md:max-w-72 lg:max-w-96 space-y-2 w-full"
       >
         <h2 id="password-recovery-section" className="sr-only">
-          Recover your password
+          Send email to recover password
         </h2>
         <RecoveryForm />
         <p className="space-x-1 text-xs flex justify-center">
